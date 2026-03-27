@@ -46,7 +46,6 @@ CREATE TABLE NhanVien (
     MatKhau VARCHAR(255)
 );
 
--- 6. Bảng Đơn hàng
 CREATE TABLE DonHang (
     MaDonHang INT PRIMARY KEY IDENTITY(1,1),
     NgayLap DATETIME DEFAULT GETDATE(), 
