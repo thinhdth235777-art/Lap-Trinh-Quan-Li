@@ -46,19 +46,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business Logic Layer\KhachHangBLL.cs" />
     <Compile Include="Business Logic Layer\LoaiSanPhamBLL.cs" />
+    <Compile Include="Business Logic Layer\NhanVienBLL.cs" />
     <Compile Include="Business Logic Layer\SanPhamBLL.cs" />
     <Compile Include="Business Logic Layer\TaiKhoanBLL.cs" />
     <Compile Include="Business Logic Layer\ThuongHieuBLL.cs" />
     <Compile Include="Data Access Layer\DBConnect.cs" />
+    <Compile Include="Data Access Layer\KhachHangDAL.cs" />
     <Compile Include="Data Access Layer\LoaiSanPhamDAL.cs" />
+    <Compile Include="Data Access Layer\NhanVienDAL.cs" />
     <Compile Include="Data Access Layer\SanPhamDAL.cs" />
     <Compile Include="Data Access Layer\TaiKhoanDAL.cs" />
     <Compile Include="Data Access Layer\ThuongHieuDAL.cs" />
+    <Compile Include="Data Transfer Object\KhachHangDTO.cs" />
     <Compile Include="Data Transfer Object\LoaiSanPhamDTO.cs" />
+    <Compile Include="Data Transfer Object\NhanVienDTO.cs" />
     <Compile Include="Data Transfer Object\SanPhamDTO.cs" />
     <Compile Include="Data Transfer Object\TaiKhoanDTO.cs" />
     <Compile Include="Data Transfer Object\ThuongHieuDTO.cs" />
+    <Compile Include="Graphical User Interface\frmKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Graphical User Interface\frmKhachHang.Designer.cs">
+      <DependentUpon>frmKhachHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Graphical User Interface\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +82,12 @@
     </Compile>
     <Compile Include="Graphical User Interface\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Graphical User Interface\frmNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Graphical User Interface\frmNhanVien.Designer.cs">
+      <DependentUpon>frmNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="Graphical User Interface\frmRegister.cs">
       <SubType>Form</SubType>
@@ -85,11 +103,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Graphical User Interface\frmKhachHang.resx">
+      <DependentUpon>frmKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Graphical User Interface\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Graphical User Interface\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Graphical User Interface\frmNhanVien.resx">
+      <DependentUpon>frmNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Graphical User Interface\frmRegister.resx">
       <DependentUpon>frmRegister.cs</DependentUpon>

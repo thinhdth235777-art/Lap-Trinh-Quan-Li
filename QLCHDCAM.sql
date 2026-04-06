@@ -1,4 +1,4 @@
-CREATE DATABASE QLCHDungCuAmNhac
+﻿CREATE DATABASE QLCHDungCuAmNhac
 go
 Use QLCHDungCuAmNhac
 go
@@ -104,3 +104,17 @@ INSERT INTO SanPham (TenSanPham, MaLoai, MaThuongHieu, GiaBan, SoLuongTon, MoTa,
 (N'Trống Điện Roland TD-17KVX', 4, 3, 42000000, 2, N'Cảm giác chơi như trống thật chuyên nghiệp.', 'roland_td17.jpg'),
 (N'Guitar Acoustic Taylor 114e', 2, 5, 22000000, 4, N'Dòng Grand Auditorium cao cấp.', 'taylor_114e.jpg');
 GO
+
+-- 4. CHÈN DỮ LIỆU MẪU CHO NHÂN VIÊN
+INSERT INTO NhanVien (HoTen, ChucVu, SoDienThoai, TaiKhoan, MatKhau) VALUES
+(N'Nguyễn Minh Tuấn', N'Quản lý', '0981111111', 'admin', '123'),
+(N'Lê Hoàng Nam', N'Nhân viên', '0982222222', 'namnv', '123'),
+(N'Trần Quốc Bảo', N'Nhân viên', '0983333333', 'baonv', '123');
+
+-- 5. CHÈN DỮ LIỆU MẪU CHO KHÁCH HÀNG
+INSERT INTO KhachHang (HoTen, SoDienThoai, Email, DiaChi, TinhThanh) VALUES
+(N'Nguyễn Văn A', '0901234567', 'a@gmail.com', N'Châu Đốc', N'An Giang'),
+(N'Trần Thị B', '0912345678', 'b@gmail.com', N'Ninh Kiều', N'Cần Thơ'),
+(N'Lê Văn C', '0923456789', 'c@gmail.com', N'Quận 1', N'TP.HCM'),
+(N'Phạm Thị D', '0934567890', 'd@gmail.com', N'Hải Châu', N'Đà Nẵng'),
+(N'Hoàng Văn E', '0945678901', 'e@gmail.com', N'Hoàn Kiếm', N'Hà Nội');

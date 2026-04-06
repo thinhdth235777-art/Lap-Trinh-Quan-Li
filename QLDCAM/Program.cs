@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLDCAM.Graphical_User_Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace QLDCAM
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmLogin());
+            Application.Run(new frmKhachHang());
         }
     }
 }

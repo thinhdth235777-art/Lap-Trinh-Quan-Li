@@ -38,7 +38,7 @@ namespace QLDCAM.Graphical_User_Interface
 
         private void mnuNhanVien_Click(object sender, EventArgs e)
         {
-
+            OpenChildForm(new frmNhanVien());
         }
 
         private void mnuDangXuat_Click(object sender, EventArgs e)
@@ -57,6 +57,11 @@ namespace QLDCAM.Graphical_User_Interface
         private void frmMain_Load(object sender, EventArgs e)
         {
             //OpenChildForm(new frmHome());
+        }
+
+        private void mnuKhachHang_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmKhachHang());
         }
     }
     
