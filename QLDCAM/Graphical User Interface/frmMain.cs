@@ -56,7 +56,7 @@ namespace QLDCAM.Graphical_User_Interface
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            OpenChildForm(new frmHome());
+            //OpenChildForm(new frmHome());
         }
     }
     
