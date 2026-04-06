@@ -17,14 +17,18 @@ namespace QLDCAM.Business_Logic_Layer
         {
             return dal.LayTatCaSanPham();
         }
-
+        public bool XoaSanPham(int maSP)
+        {
+            // Gọi xuống DAL để thực hiện lệnh DELETE
+            return dal.XoaSP(maSP);
+        }
         public string KiemTraVaLuu(SanPhamDTO sp, string hanhDong)
         {
             // 1. Kiểm tra để trống
             if (string.IsNullOrWhiteSpace(sp.TenSanPham))
                 return "Tên sản phẩm không được để trống!";
 
-            // 2. Kiểm tra giá bán (> 0) theo nghiệp vụ bạn gửi
+            // 2. Kiểm tra giá bán (> 0)
             if (sp.GiaBan <= 0)
                 return "Giá bán phải là số dương (> 0)!";
 
@@ -32,14 +36,22 @@ namespace QLDCAM.Business_Logic_Layer
             if (sp.SoLuongTon < 0)
                 return "Số lượng tồn không được âm!";
 
-            // Nếu ok hết thì gọi DAL để thực thi
+            // --- LOGIC THỰC THI THEO HÀNH ĐỘNG ---
             if (hanhDong == "THEM")
             {
                 if (dal.ThemSP(sp)) return "Thành công";
             }
-            // ... viết tiếp cho Sửa/Xóa sau
+            else if (hanhDong == "SUA")
+            {
+                // Gọi hàm SuaSP dưới DAL (nhớ truyền đối tượng sp chứa ID vào)
+                if (dal.SuaSP(sp)) return "Thành công";
+            }
 
             return "Thất bại";
+        }
+        public DataTable TimKiem(string ten)
+        {
+            return dal.TimKiemSP(ten);
         }
     }
 }
