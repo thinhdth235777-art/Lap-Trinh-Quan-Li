@@ -1,4 +1,5 @@
-﻿CREATE DATABASE QLCHDungCuAmNhac
+CREATE DATABASE QLCHDungCuAmNhac
+go
 Use QLCHDungCuAmNhac
 go
 
@@ -76,3 +77,30 @@ CREATE TABLE TaiKhoan (
     MaNhanVien INT,
     CONSTRAINT FK_TaiKhoan_NhanVien FOREIGN KEY (MaNhanVien) REFERENCES NhanVien(MaNhanVien)
 );
+
+-- 1. CHÈN DỮ LIỆU MẪU CHO LOẠI SẢN PHẨM
+INSERT INTO LoaiSanPham (TenLoai) VALUES 
+(N'Piano'),
+(N'Guitar'),
+(N'Organ/Keyboard'),
+(N'Trống (Drums)'),
+(N'Phụ kiện');
+GO
+
+-- 2. CHÈN DỮ LIỆU MẪU CHO THƯƠNG HIỆU
+INSERT INTO ThuongHieu (TenThuongHieu) VALUES 
+(N'Yamaha'),
+(N'Fender'),
+(N'Roland'),
+(N'Casio'),
+(N'Taylor');
+GO
+
+-- 3. CHÈN DỮ LIỆU MẪU CHO SẢN PHẨM
+INSERT INTO SanPham (TenSanPham, MaLoai, MaThuongHieu, GiaBan, SoLuongTon, MoTa, HinhAnh) VALUES 
+(N'Piano Điện Yamaha P-125', 1, 1, 15500000, 5, N'Thiết kế nhỏ gọn, âm thanh chân thực.', 'yamaha_p125.jpg'),
+(N'Guitar Điện Fender Player Stratocaster', 2, 2, 18200000, 3, N'Âm thanh cổ điển của Fender.', 'fender_strat.jpg'),
+(N'Organ Casio CT-X3000', 3, 4, 7500000, 10, N'Phù hợp cho người mới học và biểu diễn.', 'casio_ctx3000.jpg'),
+(N'Trống Điện Roland TD-17KVX', 4, 3, 42000000, 2, N'Cảm giác chơi như trống thật chuyên nghiệp.', 'roland_td17.jpg'),
+(N'Guitar Acoustic Taylor 114e', 2, 5, 22000000, 4, N'Dòng Grand Auditorium cao cấp.', 'taylor_114e.jpg');
+GO
