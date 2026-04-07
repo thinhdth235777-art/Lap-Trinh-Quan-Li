@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 namespace QLDCAM.Data_Access_Layer
 {
     using QLDCAM.Data_Transfer_Object;
+    using System.Data.SqlClient;
+
     public class SanPhamDAL
     {
         DBConnect db = new DBConnect();
@@ -75,6 +77,27 @@ namespace QLDCAM.Data_Access_Layer
                                 WHERE sp.TenSanPham LIKE N'%{0}%'", ten);
 
             return db.LayBangDuLieu(sql);
+        }
+        public int LaySoLuongTon(string maSP)
+        {
+            try
+            {
+                string sql = "SELECT SoLuongTon FROM SanPham WHERE MaSanPham = @maSP";
+
+                SqlCommand cmd = new SqlCommand(sql);
+                cmd.Parameters.AddWithValue("@maSP", maSP);
+
+                object result = cmd.ExecuteScalar();
+
+                if (result != null)
+                    return Convert.ToInt32(result);
+
+                return 0;
+            }
+            catch
+            {
+                return 0;
+            }
         }
     }
 }

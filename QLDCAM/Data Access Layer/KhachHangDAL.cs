@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,6 +68,29 @@ namespace QLDCAM.Data_Access_Layer
             string sql = string.Format(@"SELECT * FROM KhachHang 
                                         WHERE HoTen LIKE N'%{0}%'", ten);
             return db.LayBangDuLieu(sql);
+        }
+        public string LayTinhThanhTheoMaKH(int maKH)
+        {
+            try
+            {
+                
+
+                string sql = "SELECT TinhThanh FROM KhachHang WHERE MaKH = @maKH";
+
+                SqlCommand cmd = new SqlCommand(sql);
+                cmd.Parameters.AddWithValue("@maKH", maKH);
+
+                object result = cmd.ExecuteScalar();
+
+                if (result != null)
+                    return result.ToString();
+
+                return "";
+            }
+            catch
+            {
+                return "";
+            }
         }
     }
 }

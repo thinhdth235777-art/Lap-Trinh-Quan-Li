@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business Logic Layer\DonHangBLL.cs" />
     <Compile Include="Business Logic Layer\KhachHangBLL.cs" />
     <Compile Include="Business Logic Layer\LoaiSanPhamBLL.cs" />
     <Compile Include="Business Logic Layer\NhanVienBLL.cs" />
@@ -53,18 +54,27 @@
     <Compile Include="Business Logic Layer\TaiKhoanBLL.cs" />
     <Compile Include="Business Logic Layer\ThuongHieuBLL.cs" />
     <Compile Include="Data Access Layer\DBConnect.cs" />
+    <Compile Include="Data Access Layer\DonHangDAL.cs" />
     <Compile Include="Data Access Layer\KhachHangDAL.cs" />
     <Compile Include="Data Access Layer\LoaiSanPhamDAL.cs" />
     <Compile Include="Data Access Layer\NhanVienDAL.cs" />
     <Compile Include="Data Access Layer\SanPhamDAL.cs" />
     <Compile Include="Data Access Layer\TaiKhoanDAL.cs" />
     <Compile Include="Data Access Layer\ThuongHieuDAL.cs" />
+    <Compile Include="Data Transfer Object\ChiTietDonHangDTO.cs" />
+    <Compile Include="Data Transfer Object\DonHangDTO.cs" />
     <Compile Include="Data Transfer Object\KhachHangDTO.cs" />
     <Compile Include="Data Transfer Object\LoaiSanPhamDTO.cs" />
     <Compile Include="Data Transfer Object\NhanVienDTO.cs" />
     <Compile Include="Data Transfer Object\SanPhamDTO.cs" />
     <Compile Include="Data Transfer Object\TaiKhoanDTO.cs" />
     <Compile Include="Data Transfer Object\ThuongHieuDTO.cs" />
+    <Compile Include="Graphical User Interface\frmDonHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Graphical User Interface\frmDonHang.Designer.cs">
+      <DependentUpon>frmDonHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Graphical User Interface\frmKhachHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +113,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Graphical User Interface\frmDonHang.resx">
+      <DependentUpon>frmDonHang.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Graphical User Interface\frmKhachHang.resx">
       <DependentUpon>frmKhachHang.cs</DependentUpon>
     </EmbeddedResource>
