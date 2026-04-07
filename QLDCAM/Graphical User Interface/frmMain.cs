@@ -63,6 +63,23 @@ namespace QLDCAM.Graphical_User_Interface
         {
             OpenChildForm(new frmKhachHang());
         }
+
+        // Mở Thống kê: Doanh thu theo tháng (chart)
+        private void mnuDoanhThuTheoThang_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmThongKe("DoanhThu"));
+        }
+
+        // Mở Thống kê: Sản phẩm bán chạy (Tab Top sản phẩm)
+        private void mnuSanPhamBanChay_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmThongKe("SanPhamBanChay"));
+        }
+
+        // Mở Thống kê: Hàng tồn kho (Tab Tồn thấp)
+        private void mnuHangTonKho_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmThongKe("HangTonKho"));
+        }
     }
-    
 }
