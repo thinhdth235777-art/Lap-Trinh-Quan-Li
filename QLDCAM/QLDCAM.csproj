@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,7 @@
     <Compile Include="Business Logic Layer\NhanVienBLL.cs" />
     <Compile Include="Business Logic Layer\SanPhamBLL.cs" />
     <Compile Include="Business Logic Layer\TaiKhoanBLL.cs" />
+    <Compile Include="Business Logic Layer\ThongKeBLL.cs" />
     <Compile Include="Business Logic Layer\ThuongHieuBLL.cs" />
     <Compile Include="Data Access Layer\DBConnect.cs" />
     <Compile Include="Data Access Layer\KhachHangDAL.cs" />
@@ -58,12 +60,14 @@
     <Compile Include="Data Access Layer\NhanVienDAL.cs" />
     <Compile Include="Data Access Layer\SanPhamDAL.cs" />
     <Compile Include="Data Access Layer\TaiKhoanDAL.cs" />
+    <Compile Include="Data Access Layer\ThongKeDAL.cs" />
     <Compile Include="Data Access Layer\ThuongHieuDAL.cs" />
     <Compile Include="Data Transfer Object\KhachHangDTO.cs" />
     <Compile Include="Data Transfer Object\LoaiSanPhamDTO.cs" />
     <Compile Include="Data Transfer Object\NhanVienDTO.cs" />
     <Compile Include="Data Transfer Object\SanPhamDTO.cs" />
     <Compile Include="Data Transfer Object\TaiKhoanDTO.cs" />
+    <Compile Include="Data Transfer Object\ThongKeDTO.cs" />
     <Compile Include="Data Transfer Object\ThuongHieuDTO.cs" />
     <Compile Include="Graphical User Interface\frmKhachHang.cs">
       <SubType>Form</SubType>
@@ -101,6 +105,12 @@
     <Compile Include="Graphical User Interface\frmSanPham.Designer.cs">
       <DependentUpon>frmSanPham.cs</DependentUpon>
     </Compile>
+    <Compile Include="Graphical User Interface\frmThongKe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Graphical User Interface\frmThongKe.Designer.cs">
+      <DependentUpon>frmThongKe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Graphical User Interface\frmKhachHang.resx">
@@ -120,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Graphical User Interface\frmSanPham.resx">
       <DependentUpon>frmSanPham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Graphical User Interface\frmThongKe.resx">
+      <DependentUpon>frmThongKe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
