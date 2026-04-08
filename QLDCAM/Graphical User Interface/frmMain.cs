@@ -81,5 +81,15 @@ namespace QLDCAM.Graphical_User_Interface
         {
             OpenChildForm(new frmThongKe("HangTonKho"));
         }
+
+        private void mnuLoaiSanPham_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmLoaiSanPham());
+        }
+
+        private void mnuThuongHieu_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmThuongHieu());
+        }
     }
 }

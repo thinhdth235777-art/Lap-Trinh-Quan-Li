@@ -78,7 +78,7 @@ namespace QLDCAM.Data_Access_Layer
 
             return db.LayBangDuLieu(sql);
         }
-        public int LaySoLuongTon(string maSP)
+        public int LaySoLuongTon(int maSP)
         {
             try
             {

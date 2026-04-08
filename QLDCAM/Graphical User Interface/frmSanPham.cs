@@ -66,28 +66,51 @@ namespace QLDCAM.Graphical_User_Interface
         {
             dgvSanPham.DataSource = bllSP.LayDanhSachSP();
 
+            // 1. Ẩn cột không cần thiết
             if (dgvSanPham.Columns.Contains("MoTa"))
-            {
                 dgvSanPham.Columns["MoTa"].Visible = false;
+
+            // 2. Đặt tên tiêu đề có dấu
+            dgvSanPham.Columns["MaSanPham"].HeaderText = "Mã Sản Phẩm";
+            dgvSanPham.Columns["TenSanPham"].HeaderText = "Tên Sản Phẩm";
+            dgvSanPham.Columns["TenLoai"].HeaderText = "Loại Sản Phẩm";
+            dgvSanPham.Columns["TenThuongHieu"].HeaderText = "Thương Hiệu";
+            dgvSanPham.Columns["GiaBan"].HeaderText = "Giá Bán";
+            dgvSanPham.Columns["SoLuongTon"].HeaderText = "Số Lượng Tồn";
+            dgvSanPham.Columns["HinhAnh"].HeaderText = "File Ảnh";
+
+            // 3. Cấu hình Header: Cấm rớt dòng, tăng độ cao và in đậm căn giữa
+            dgvSanPham.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            dgvSanPham.ColumnHeadersHeight = 35;
+
+            foreach (DataGridViewColumn col in dgvSanPham.Columns)
+            {
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                col.HeaderCell.Style.Font = new Font("Arial", 9, FontStyle.Bold);
             }
 
-            dgvSanPham.Columns["MaSanPham"].Width = 120;
+            // 4. Thiết lập độ rộng cột (Trị dứt điểm vụ cột Giá Bán chiếm chỗ)
+            // Co giãn theo nội dung để vừa khít chữ
+            dgvSanPham.Columns["MaSanPham"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvSanPham.Columns["TenLoai"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvSanPham.Columns["TenThuongHieu"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvSanPham.Columns["SoLuongTon"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
-            dgvSanPham.Columns["TenSanPham"].Width = 300;
-            dgvSanPham.Columns["TenSanPham"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            // Khóa cứng độ rộng cột Giá Bán và File Ảnh (không cho tụi nó tự fill)
+            dgvSanPham.Columns["GiaBan"].Width = 130;
+            dgvSanPham.Columns["HinhAnh"].Width = 230;
 
-            dgvSanPham.Columns["TenLoai"].Width = 150;
-            dgvSanPham.Columns["TenLoai"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            // Ép Tên Sản Phẩm hốt hết khoảng trống còn lại
+            dgvSanPham.Columns["TenSanPham"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvSanPham.Columns["TenSanPham"].FillWeight = 200; // Trọng số cao nhất
+            dgvSanPham.Columns["TenSanPham"].MinimumWidth = 250;
 
+            // 5. Căn lề dữ liệu và định dạng số
             dgvSanPham.Columns["GiaBan"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvSanPham.Columns["GiaBan"].DefaultCellStyle.Format = "N0";
 
-            dgvSanPham.Columns["SoLuongTon"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            dgvSanPham.Columns["HinhAnh"].Width = 150;
-            dgvSanPham.Columns["HinhAnh"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dgvSanPham.Columns["TenThuongHieu"].Width = 130;
+            dgvSanPham.Columns["SoLuongTon"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvSanPham.Columns["MaSanPham"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
         void LoadDataCombobox()

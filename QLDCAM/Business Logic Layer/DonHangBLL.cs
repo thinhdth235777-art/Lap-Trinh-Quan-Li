@@ -40,7 +40,7 @@ namespace QLDCAM.Business_Logic_Layer
         // ========================
         // 3. Kiểm tra tồn kho
         // ========================
-        public string KiemTraSoLuong(string maSP, int soLuong)
+        public string KiemTraSoLuong(int maSP, int soLuong)
         {
             if (soLuong <= 0)
                 return "Số lượng phải > 0";
