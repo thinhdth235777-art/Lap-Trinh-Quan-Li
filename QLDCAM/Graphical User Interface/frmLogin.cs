@@ -39,6 +39,7 @@ namespace QLDCAM
 
             if (tkBLL.CheckLogin(user, pass))
             {
+                SessionUser.UserHienTai = tkBLL.LayThongTinTaiKhoan(user, pass);
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo");
 
                 

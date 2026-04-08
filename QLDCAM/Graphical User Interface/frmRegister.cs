@@ -32,7 +32,7 @@ namespace QLDCAM.Graphical_User_Interface
 
             if (result == "Thành công")
             {
-                MessageBox.Show("Chúc mừng Thịnh! Đã tạo tài khoản thành công.", "Thông báo");
+                MessageBox.Show("Chúc mừng! Tài khoản " + tk.TenDangNhap + " đã được tạo thành công.");
                 this.Close(); 
             }
             else

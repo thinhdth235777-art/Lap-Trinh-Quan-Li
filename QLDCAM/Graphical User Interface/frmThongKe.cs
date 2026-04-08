@@ -20,6 +20,20 @@ namespace QLDCAM.Graphical_User_Interface
         public frmThongKe()
         {
             InitializeComponent();
+            Action<DataGridView> cfgGrid = (g) =>
+            {
+                g.Dock = DockStyle.Fill;
+                g.ReadOnly = true;
+                g.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                g.AllowUserToAddRows = false;
+                g.AllowUserToDeleteRows = false;
+                g.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            };
+
+            // Gọi hàm cho các bảng của bạn
+            cfgGrid(this.dgvChiTiet);
+            cfgGrid(this.dgvLowStock);
+            cfgGrid(this.dgvTopCustomers);
         }
 
         // Constructor mới: cho phép truyền view khi khởi tạo

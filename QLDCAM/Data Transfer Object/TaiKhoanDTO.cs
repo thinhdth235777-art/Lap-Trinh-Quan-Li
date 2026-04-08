@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace QLDCAM.Data_Transfer_Object
 {
-    internal class TaiKhoanDTO
+    public class TaiKhoanDTO
     {
         public string TenDangNhap { get; set; }
         public string MatKhau { get; set; }
@@ -21,5 +22,6 @@ namespace QLDCAM.Data_Transfer_Object
             this.Email = email;
             this.Quyen = quyen;
         }
+       
     }
 }

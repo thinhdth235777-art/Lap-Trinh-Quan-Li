@@ -47,5 +47,23 @@ namespace QLDCAM.Data_Access_Layer
                 CloseConn();
             }
         }
+        public TaiKhoanDTO LayThongTinTaiKhoan(string user, string pass)
+        {
+            try
+            {
+                OpenConn();
+                string sql = "SELECT * FROM TaiKhoan WHERE TenDangNhap = @user AND MatKhau = @pass";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@user", user);
+                cmd.Parameters.AddWithValue("@pass", pass);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    return new TaiKhoanDTO(dr["TenDangNhap"].ToString(), "", dr["Email"].ToString(), dr["Quyen"].ToString());
+                }
+                return null;
+            }
+            finally { CloseConn(); }
+        }
     }
 }

@@ -49,5 +49,9 @@ namespace QLDCAM.Business_Logic_Layer
             if (prevVal == 0) return lastVal == 0 ? 0m : 100m;
             return Math.Round((lastVal - prevVal) / prevVal * 100m, 2);
         }
+        public int LayTongSoSanPham()
+        {
+            return dal.LayTongSoSanPham();
+        }
     }
 }

@@ -36,50 +36,108 @@ namespace QLDCAM.Graphical_User_Interface
             childForm.Show();
         }
 
-        private void mnuNhanVien_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new frmNhanVien());
-        }
-
-        private void mnuDangXuat_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Bạn có muốn đăng xuất không?", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                this.Close(); 
-            }
-        }
-
-        private void mnuSanPham_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new frmSanPham()); 
-        }
+ 
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            //OpenChildForm(new frmHome());
+            //OpenChildForm(new frmDashboard());
+            
         }
 
-        private void mnuKhachHang_Click(object sender, EventArgs e)
+    
+        private void btnMenuKho_Click(object sender, EventArgs e)
+        {
+            if (pnlMenuKho.Height == 45)
+            {
+                pnlMenuKho.Height = 180; 
+            }
+            else
+            {
+                pnlMenuKho.Height = 45;  
+            }
+        }
+
+        private void btnMenuDoiTac_Click(object sender, EventArgs e)
+        {
+
+            if (pnlMenuDoiTac.Height == 45)
+            {
+                pnlMenuDoiTac.Height = 135;
+            }
+            else
+            {
+                pnlMenuDoiTac.Height = 45;
+            }
+        }
+
+        private void btnMenuBanHang_Click(object sender, EventArgs e)
+        {
+
+            if (pnlMenuBanHang.Height == 45)
+            {
+                pnlMenuBanHang.Height = 180;
+            }
+            else
+            {
+                pnlMenuBanHang.Height = 45;
+            }
+        }
+
+        private void btnMenuThongKe_Click(object sender, EventArgs e)
+        {
+          if (pnlMenuThongKe.Height == 45)
+            {
+                pnlMenuThongKe.Height = 180;
+            }
+            else
+            {
+                pnlMenuThongKe.Height = 45;
+            }
+        }
+
+        private void btnSanPham_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmSanPham());
+        }
+
+        private void btnLoaiSanPham_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmLoaiSanPham());
+        }
+
+        private void btnThuongHieu_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmThuongHieu());
+        }
+
+        private void btnKhachHang_Click(object sender, EventArgs e)
         {
             OpenChildForm(new frmKhachHang());
         }
 
-        // Mở Thống kê: Doanh thu theo tháng (chart)
-        private void mnuDoanhThuTheoThang_Click(object sender, EventArgs e)
+        private void btnNhanVien_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmNhanVien());
+        }
+
+        private void btnDoanhThuTheoThang_Click(object sender, EventArgs e)
         {
             OpenChildForm(new frmThongKe("DoanhThu"));
         }
 
-        // Mở Thống kê: Sản phẩm bán chạy (Tab Top sản phẩm)
-        private void mnuSanPhamBanChay_Click(object sender, EventArgs e)
+        private void btnSanPhamBanChay_Click(object sender, EventArgs e)
         {
             OpenChildForm(new frmThongKe("SanPhamBanChay"));
         }
 
-        // Mở Thống kê: Hàng tồn kho (Tab Tồn thấp)
-        private void mnuHangTonKho_Click(object sender, EventArgs e)
+        private void btnHangTonKho_Click(object sender, EventArgs e)
         {
             OpenChildForm(new frmThongKe("HangTonKho"));
+        }
+
+        private void btnMenuHome_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmDashboard());
         }
     }
 }

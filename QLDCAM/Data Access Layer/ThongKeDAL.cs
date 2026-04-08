@@ -1,11 +1,12 @@
-﻿using System;
+﻿using QLDCAM.Data_Transfer_Object;
+using System;
 using System.Data;
-using QLDCAM.Data_Transfer_Object;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace QLDCAM.Data_Access_Layer
 {
-    internal class ThongKeDAL
+    internal class ThongKeDAL : DBConnect
     {
         DBConnect db = new DBConnect();
 
@@ -69,6 +70,20 @@ INNER JOIN KhachHang kh ON dh.MaKhachHang = kh.MaKhachHang
 GROUP BY kh.MaKhachHang, kh.HoTen
 ORDER BY TongMua DESC";
             return db.LayBangDuLieu(sql);
+        }
+        public int LayTongSoSanPham()
+        {
+            try
+            {
+                OpenConn(); // Mở kết nối SQL
+                string sql = "SELECT COUNT(*) FROM SanPham";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                // ExecuteScalar dùng để lấy 1 giá trị duy nhất (ở đây là con số tổng)
+                return (int)cmd.ExecuteScalar();
+            }
+            catch { return 0; }
+            finally { CloseConn(); }
         }
     }
 }

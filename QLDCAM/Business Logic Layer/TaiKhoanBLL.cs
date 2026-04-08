@@ -38,5 +38,10 @@ namespace QLDCAM.Business_Logic_Layer
 
             return "Tên đăng nhập đã tồn tại hoặc có lỗi hệ thống!";
         }
+        public TaiKhoanDTO LayThongTinTaiKhoan(string user, string pass)
+        {
+            // Đây là cầu nối: BLL gọi xuống hàm bạn vừa chuyển sang DAL lúc nãy
+            return dal.LayThongTinTaiKhoan(user, pass);
+        }
     }
 }
