@@ -36,13 +36,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtNV = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbSanPham = new System.Windows.Forms.ComboBox();
             this.btnThem = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtSL = new System.Windows.Forms.TextBox();
             this.dtgHoaDon = new System.Windows.Forms.DataGridView();
             this.label6 = new System.Windows.Forms.Label();
             this.txtTienSP = new System.Windows.Forms.TextBox();
@@ -52,10 +50,13 @@
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnLuu = new System.Windows.Forms.Button();
+            this.cbNV = new System.Windows.Forms.ComboBox();
+            this.numSL = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgHoaDon)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSL)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -77,13 +78,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbNV);
             this.groupBox1.Controls.Add(this.cbKH);
             this.groupBox1.Controls.Add(this.dtpNgayLap);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtNV);
             this.groupBox1.Controls.Add(this.txtMaHD);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -137,21 +138,13 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Tên nhân viên:";
             // 
-            // txtNV
-            // 
-            this.txtNV.Location = new System.Drawing.Point(126, 85);
-            this.txtNV.Name = "txtNV";
-            this.txtNV.ReadOnly = true;
-            this.txtNV.Size = new System.Drawing.Size(313, 26);
-            this.txtNV.TabIndex = 1;
-            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.numSL);
             this.groupBox2.Controls.Add(this.cbSanPham);
             this.groupBox2.Controls.Add(this.btnThem);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.txtSL);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(486, 12);
             this.groupBox2.Name = "groupBox2";
@@ -195,18 +188,14 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Tên sản phẩm:";
             // 
-            // txtSL
-            // 
-            this.txtSL.Location = new System.Drawing.Point(119, 63);
-            this.txtSL.Name = "txtSL";
-            this.txtSL.ReadOnly = true;
-            this.txtSL.Size = new System.Drawing.Size(313, 26);
-            this.txtSL.TabIndex = 1;
-            // 
             // dtgHoaDon
             // 
+            this.dtgHoaDon.AllowUserToAddRows = false;
+            this.dtgHoaDon.AllowUserToDeleteRows = false;
+            this.dtgHoaDon.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtgHoaDon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgHoaDon.Location = new System.Drawing.Point(13, 176);
+            this.dtgHoaDon.MultiSelect = false;
             this.dtgHoaDon.Name = "dtgHoaDon";
             this.dtgHoaDon.Size = new System.Drawing.Size(918, 253);
             this.dtgHoaDon.TabIndex = 3;
@@ -294,6 +283,39 @@
             this.btnLuu.Text = "Lưu hoá đơn";
             this.btnLuu.UseVisualStyleBackColor = true;
             // 
+            // cbNV
+            // 
+            this.cbNV.DisplayMember = "HoTen";
+            this.cbNV.FormattingEnabled = true;
+            this.cbNV.Location = new System.Drawing.Point(126, 84);
+            this.cbNV.Name = "cbNV";
+            this.cbNV.Size = new System.Drawing.Size(313, 27);
+            this.cbNV.TabIndex = 3;
+            this.cbNV.ValueMember = "MaKH";
+            // 
+            // numSL
+            // 
+            this.numSL.Location = new System.Drawing.Point(119, 64);
+            this.numSL.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numSL.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numSL.Name = "numSL";
+            this.numSL.Size = new System.Drawing.Size(159, 26);
+            this.numSL.TabIndex = 4;
+            this.numSL.ThousandsSeparator = true;
+            this.numSL.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // frmCTDonHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -314,6 +336,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgHoaDon)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSL)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -326,14 +349,12 @@
         private System.Windows.Forms.DateTimePicker dtpNgayLap;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtNV;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbKH;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtSL;
         private System.Windows.Forms.ComboBox cbSanPham;
         private System.Windows.Forms.DataGridView dtgHoaDon;
         private System.Windows.Forms.Label label6;
@@ -344,5 +365,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnLuu;
+        private System.Windows.Forms.ComboBox cbNV;
+        private System.Windows.Forms.NumericUpDown numSL;
     }
 }

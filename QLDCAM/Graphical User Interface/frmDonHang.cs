@@ -23,5 +23,23 @@ namespace QLDCAM.Graphical_User_Interface
         {
 
         }
+
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            using(frmCTDonHang chiTiet=new frmCTDonHang())
+            {
+                chiTiet.ShowDialog();
+            }    
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            id = Convert.ToInt32(dtgHoadon.CurrentRow.Cells["ID"].Value.ToString());
+            using (frmCTDonHang chiTiet = new frmCTDonHang(id))
+            {
+                chiTiet.ShowDialog();
+            } 
+                
+        }
     }
 }

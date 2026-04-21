@@ -35,6 +35,53 @@ namespace QLDCAM.Data_Access_Layer
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                return dt;        }
+                return dt;        
+        }
+        // Thêm hóa đơn mới
+        public bool ThemDH(DonHangDTO dh)
+        {
+                string sql = "INSERT INTO DonHang (MaNhanVien, MaKhachHang, NgayDatHang, TongTien) VALUES (@manv, @makh, @ngay, @tongtien)";
+                SqlCommand cmd = new SqlCommand(sql);
+                cmd.Parameters.AddWithValue("@manv", dh.MaNhanVien);
+                cmd.Parameters.AddWithValue("@makh", dh.MaKhachHang);
+                cmd.Parameters.AddWithValue("@ngay", dh.NgayDatHang);
+                cmd.Parameters.AddWithValue("@tongtien", dh.TongTien);
+                return cmd.ExecuteNonQuery() > 0;
+        }
+
+        // Sửa hóa đơn (thường chỉ sửa ngày hoặc khách hàng, ít khi sửa tổng tiền thủ công)
+        public bool SuaDH(DonHangDTO dh)
+        {
+                string sql = "UPDATE DonHang SET MaKhachHang=@makh, NgayDatHang=@ngay WHERE MaDonHang=@ma";
+                SqlCommand cmd = new SqlCommand(sql);
+                cmd.Parameters.AddWithValue("@makh", dh.MaKhachHang);
+                cmd.Parameters.AddWithValue("@ngay", dh.NgayDatHang);
+                cmd.Parameters.AddWithValue("@ma", dh.MaDonHang);
+                return cmd.ExecuteNonQuery() > 0;
+        }
+
+        // Xóa hóa đơn (Phải xóa ChiTietDonHang trước vì ràng buộc khóa ngoại)
+        public bool XoaDH(int maDH)
+        {
+                try
+                {
+                    // 1. Xóa chi tiết
+                    string sqlCT = "DELETE FROM ChiTietDonHang WHERE MaDonHang = @ma";
+                    SqlCommand cmdCT = new SqlCommand(sqlCT);
+                    cmdCT.Parameters.AddWithValue("@ma", maDH);
+                    cmdCT.ExecuteNonQuery();
+
+                    // 2. Xóa đơn hàng
+                    string sqlDH = "DELETE FROM DonHang WHERE MaDonHang = @ma";
+                    SqlCommand cmdDH = new SqlCommand(sqlDH);
+                    cmdDH.Parameters.AddWithValue("@ma", maDH);
+                    cmdDH.ExecuteNonQuery();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+        }
     }
 }
