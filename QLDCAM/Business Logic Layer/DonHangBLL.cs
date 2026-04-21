@@ -21,7 +21,7 @@ namespace QLDCAM.Business_Logic_Layer
         // ========================
         public DataTable LayDanhSachDonHang()
         {
-            return dal.LayTatCaDonHang();
+            return dal.LayDanhSachHoaDon();
         }
 
         // ========================
@@ -90,7 +90,7 @@ namespace QLDCAM.Business_Logic_Layer
         public string KiemTraVaLuu(DonHangDTO dh, List<ChiTietDonHangDTO> dsCT)
         {
             // 1. Check khách hàng
-            if (dh.MaKH<=0)
+            if (dh.MaKhachHang<=0)
                 return "Vui lòng chọn khách hàng!";
 
             // 2. Check sản phẩm
@@ -108,13 +108,13 @@ namespace QLDCAM.Business_Logic_Layer
 
             // 4. Tính tiền
             decimal tongTien = TinhTongTien(dsCT);
-            int phiVC = TinhPhiVanChuyen(dh.MaKH);
+            int phiVC = TinhPhiVanChuyen(dh.MaKhachHang);
             decimal tongThanhToan = TinhTongThanhToan(tongTien, phiVC);
 
             dh.TongTien = tongThanhToan;
 
             // 5. Lưu hóa đơn
-            int maDH = dal.ThemDonHang(dh);
+            int maDH = dal.(dh);
 
             if (maDH <= 0)
                 return "Lưu hóa đơn thất bại!";
