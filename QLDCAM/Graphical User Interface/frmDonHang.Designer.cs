@@ -64,6 +64,7 @@
             this.dtgHoadon.RowHeadersWidth = 51;
             this.dtgHoadon.Size = new System.Drawing.Size(835, 325);
             this.dtgHoadon.TabIndex = 0;
+            this.dtgHoadon.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgHoadon_CellContentClick);
             // 
             // btnThem
             // 
@@ -73,7 +74,7 @@
             this.btnThem.TabIndex = 1;
             this.btnThem.Text = "Lập hoá đơn mới";
             this.btnThem.UseVisualStyleBackColor = true;
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click_1);
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnSua
             // 
@@ -92,6 +93,7 @@
             this.btnXoa.TabIndex = 1;
             this.btnXoa.Text = "Xoá...";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnThoat
             // 
@@ -127,6 +129,7 @@
             this.Name = "frmDonHang";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hoá đơn";
+            this.Load += new System.EventHandler(this.frmDonHang_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgHoadon)).EndInit();
             this.ResumeLayout(false);

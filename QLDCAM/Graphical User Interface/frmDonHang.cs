@@ -21,10 +21,30 @@ namespace QLDCAM.Graphical_User_Interface
         {
             InitializeComponent();
         }
+        void EnsureLinkColumn()
+        {
+            // Remove any existing link column named ChiTiet or colChiTiet
+            if (dtgHoadon.Columns.Contains("ChiTiet")) dtgHoadon.Columns.Remove("ChiTiet");
+            if (dtgHoadon.Columns.Contains("colChiTiet")) dtgHoadon.Columns.Remove("colChiTiet");
 
-        private void frmHoaDon_Load(object sender, EventArgs e)
+            DataGridViewLinkColumn link = new DataGridViewLinkColumn();
+            link.Name = "ChiTiet";
+            link.HeaderText = "Chi tiết";
+            link.Text = "Xem";
+            link.UseColumnTextForLinkValue = true;
+            link.LinkColor = Color.Blue;
+            link.ActiveLinkColor = Color.Red;
+            dtgHoadon.Columns.Add(link);
+
+            // Format TongTien column if exists
+            if (dtgHoadon.Columns.Contains("TongTien"))
+                dtgHoadon.Columns["TongTien"].DefaultCellStyle.Format = "N0";
+        }
+        private void frmDonHang_Load(object sender, EventArgs e)
         {
             LoadDSHoaDon();
+            // After load, ensure link column exists
+            EnsureLinkColumn();
         }
 
         void LoadDSHoaDon()
@@ -34,26 +54,32 @@ namespace QLDCAM.Graphical_User_Interface
         }
 
         // Sự kiện khi anh nhấn vào nút "Chi tiết" trên lưới
-        private void dgvHoaDon_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dtgHoadon_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Kiểm tra xem có phải nhấn vào cột nút Chi Tiết không
-            if (dtgHoadon.Columns[e.ColumnIndex].Name == "colChiTiet" && e.RowIndex >= 0)
-            {
-                // Lấy Mã Hóa Đơn từ dòng hiện tại
-                int maHD = Convert.ToInt32(dtgHoadon.Rows[e.RowIndex].Cells["MaDonHang"].Value);
+            if (e.RowIndex < 0) return;
 
-                // Mở Form Chi Tiết và truyền mã vào
-                frmCTDonHang fChiTiet = new frmCTDonHang(maHD);
-                fChiTiet.ShowDialog();
+            // Check if clicked column is our link column
+            if (dtgHoadon.Columns[e.ColumnIndex].Name == "ChiTiet")
+            {
+                int maHD = Convert.ToInt32(dtgHoadon.Rows[e.RowIndex].Cells["MaDonHang"].Value);
+                using (frmCTDonHang fChiTiet = new frmCTDonHang(maHD))
+                {
+                    fChiTiet.ShowDialog();
+                }
+
+                // Refresh after closing detail
+                LoadDSHoaDon();
             }
         }
         // 1. NÚT THÊM: Mở form bán hàng mới
         private void btnThem_Click(object sender, EventArgs e)
         {
-            using (frmCTDonHang chiTiet = new frmCTDonHang(maHD))
+            using (frmCTDonHang chiTiet = new frmCTDonHang(0))
             {
                 chiTiet.ShowDialog();
-            }    
+            }
+
+            LoadDSHoaDon();
         }
 
         // 2. NÚT XÓA: Hủy hóa đơn và hoàn kho

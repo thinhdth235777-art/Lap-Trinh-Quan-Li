@@ -20,8 +20,42 @@ namespace QLDCAM.Data_Access_Layer
 
         public DataTable LayChiTietTheoMa(int maHD)
         {
-            string sql = $"SELECT sp.TenSanPham, ct.SoLuong, ct.DonGia, (ct.SoLuong*ct.DonGia) as ThanhTien FROM ChiTietDonHang ct JOIN SanPham sp ON ct.MaSanPham = sp.MaSanPham WHERE ct.MaDonHang = {maHD}";
-            return LayBangDuLieu(sql);
+            // Trả về cả MaSanPham để các thao tác hoàn trả kho có thể dùng
+            string sql = "SELECT ct.MaSanPham, sp.TenSanPham, ct.SoLuong, ct.DonGia, (ct.SoLuong*ct.DonGia) as ThanhTien FROM ChiTietDonHang ct JOIN SanPham sp ON ct.MaSanPham = sp.MaSanPham WHERE ct.MaDonHang = @maHD";
+            try
+            {
+                OpenConn();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@maHD", maHD);
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        return dt;
+                    }
+                }
+            }
+            finally { CloseConn(); }
+        }
+
+        // Lấy phí vận chuyển đã lưu cho đơn hàng
+        public decimal LayPhiVanChuyen(int maHD)
+        {
+            try
+            {
+                OpenConn();
+                string sql = "SELECT PhiVanChuyen FROM DonHang WHERE MaDonHang = @maHD";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@maHD", maHD);
+                    object o = cmd.ExecuteScalar();
+                    if (o != null && o != DBNull.Value)
+                        return Convert.ToDecimal(o);
+                    return 0m;
+                }
+            }
+            finally { CloseConn(); }
         }
 
         public bool LuuHoaDonFull(DonHangDTO hd, List<ChiTietDonHangDTO> ds)
@@ -46,8 +80,23 @@ namespace QLDCAM.Data_Access_Layer
                         // 2. Thêm Chi tiết & Trừ kho
                         foreach (var item in ds)
                         {
-                            new SqlCommand($"INSERT INTO ChiTietDonHang VALUES ({maHD}, {item.MaSanPham}, {item.SoLuong}, {item.DonGia})", conn, trans).ExecuteNonQuery();
-                            new SqlCommand($"UPDATE SanPham SET SoLuongTon = SoLuongTon - {item.SoLuong} WHERE MaSanPham = {item.MaSanPham}", conn, trans).ExecuteNonQuery();
+                            string insertCT = "INSERT INTO ChiTietDonHang (MaDonHang, MaSanPham, SoLuong, DonGia) VALUES (@mahd, @masp, @sl, @dg)";
+                            using (SqlCommand cmd = new SqlCommand(insertCT, conn, trans))
+                            {
+                                cmd.Parameters.AddWithValue("@mahd", maHD);
+                                cmd.Parameters.AddWithValue("@masp", item.MaSanPham);
+                                cmd.Parameters.AddWithValue("@sl", item.SoLuong);
+                                cmd.Parameters.AddWithValue("@dg", item.DonGia);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            string updateStock = "UPDATE SanPham SET SoLuongTon = SoLuongTon - @sl WHERE MaSanPham = @masp";
+                            using (SqlCommand cmd2 = new SqlCommand(updateStock, conn, trans))
+                            {
+                                cmd2.Parameters.AddWithValue("@sl", item.SoLuong);
+                                cmd2.Parameters.AddWithValue("@masp", item.MaSanPham);
+                                cmd2.ExecuteNonQuery();
+                            }
                         }
                         trans.Commit(); return true;
                     }
@@ -71,17 +120,27 @@ namespace QLDCAM.Data_Access_Layer
                         int maSP = Convert.ToInt32(row["MaSanPham"]);
                         int sl = Convert.ToInt32(row["SoLuong"]);
                         string sqlRefund = "UPDATE SanPham SET SoLuongTon = SoLuongTon + @sl WHERE MaSanPham = @masp";
-                        SqlCommand cmd = new SqlCommand(sqlRefund, conn, trans);
-                        cmd.Parameters.AddWithValue("@sl", sl);
-                        cmd.Parameters.AddWithValue("@masp", maSP);
-                        cmd.ExecuteNonQuery();
+                        using (SqlCommand cmd = new SqlCommand(sqlRefund, conn, trans))
+                        {
+                            cmd.Parameters.AddWithValue("@sl", sl);
+                            cmd.Parameters.AddWithValue("@masp", maSP);
+                            cmd.ExecuteNonQuery();
+                        }
                     }
 
                     // 2. Xóa chi tiết trước (vì có khóa ngoại)
-                    new SqlCommand($"DELETE FROM ChiTietDonHang WHERE MaDonHang = {maHD}", conn, trans).ExecuteNonQuery();
+                    using (SqlCommand delCT = new SqlCommand("DELETE FROM ChiTietDonHang WHERE MaDonHang = @maHD", conn, trans))
+                    {
+                        delCT.Parameters.AddWithValue("@maHD", maHD);
+                        delCT.ExecuteNonQuery();
+                    }
 
                     // 3. Xóa đơn hàng
-                    new SqlCommand($"DELETE FROM DonHang WHERE MaDonHang = {maHD}", conn, trans).ExecuteNonQuery();
+                    using (SqlCommand delHD = new SqlCommand("DELETE FROM DonHang WHERE MaDonHang = @maHD", conn, trans))
+                    {
+                        delHD.Parameters.AddWithValue("@maHD", maHD);
+                        delHD.ExecuteNonQuery();
+                    }
 
                     trans.Commit();
                     return true;

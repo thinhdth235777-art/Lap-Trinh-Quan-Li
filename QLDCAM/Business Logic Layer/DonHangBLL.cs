@@ -31,5 +31,7 @@ namespace QLDCAM.Business_Logic_Layer
             // Anh có thể thêm logic kiểm tra xem hóa đơn đã quá 24h chưa thì không cho xóa
             return dal.XoaHoaDon(maHD);
         }
+
+        public decimal LayPhiVanChuyen(int maHD) => dal.LayPhiVanChuyen(maHD);
     }
 }
