@@ -38,16 +38,27 @@ namespace QLDCAM.Graphical_User_Interface
         void HienThi()
         {
             dgvNhanVien.DataSource = bll.LayDanhSachNV();
+            // Ẩn cột mật khẩu trên bảng để bảo mật
+            if (dgvNhanVien.Columns.Contains("MatKhau"))
+                dgvNhanVien.Columns["MatKhau"].Visible = false;
         }
 
         void HienThiChiTiet(DataGridViewRow row)
         {
+            // Lấy giá trị mã từ dòng được chọn
             id = Convert.ToInt32(row.Cells["MaNhanVien"].Value);
 
+            // THÊM DÒNG NÀY: Hiển thị mã lên TextBox
+            txtMaNhanVien.Text = id.ToString();
+
+            // Các dòng cũ của bạn
             txtHoVaTen.Text = row.Cells["HoTen"].Value?.ToString();
             txtDienThoai.Text = row.Cells["SoDienThoai"].Value?.ToString();
             txtChucVu.Text = row.Cells["ChucVu"].Value?.ToString();
             txtTaiKhoan.Text = row.Cells["TaiKhoan"].Value?.ToString();
+
+            // NÊN THÊM: Hiển thị mật khẩu để khi bấm "Sửa" không bị mất pass
+            txtMatKhau.Text = row.Cells["MatKhau"].Value?.ToString();
         }
 
         void setButton(bool val)
@@ -58,6 +69,9 @@ namespace QLDCAM.Graphical_User_Interface
 
             btnLuu.Enabled = !val;
             btnHuyBo.Enabled = !val;
+
+            // KHÓA ô Mã nhân viên: chỉ xem, không nhập
+            txtMaNhanVien.ReadOnly = true;
 
             txtHoVaTen.Enabled = !val;
             txtDienThoai.Enabled = !val;
