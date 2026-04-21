@@ -43,8 +43,13 @@ namespace QLDCAM.Graphical_User_Interface
 
         void HienThiChiTiet(DataGridViewRow row)
         {
+            // Lấy giá trị mã từ dòng được chọn
             id = Convert.ToInt32(row.Cells["MaKhachHang"].Value);
 
+            // THÊM DÒNG NÀY: Hiển thị mã lên TextBox
+            txtMaKhachHang.Text = id.ToString();
+
+            // Các dòng cũ của bạn
             txtHoVaTen.Text = row.Cells["HoTen"].Value?.ToString();
             txtDienThoai.Text = row.Cells["SoDienThoai"].Value?.ToString();
             txtEmail.Text = row.Cells["Email"].Value?.ToString();
@@ -73,6 +78,10 @@ namespace QLDCAM.Graphical_User_Interface
             btnLuu.Enabled = !val;
             btnHuyBo.Enabled = !val;
 
+            // KHÓA ô Mã khách hàng: luôn luôn không cho nhập
+            txtMaKhachHang.ReadOnly = true;
+
+            // Các ô khác cho phép nhập khi nhấn Thêm/Sửa (!val)
             txtHoVaTen.Enabled = !val;
             txtDienThoai.Enabled = !val;
             txtEmail.Enabled = !val;
