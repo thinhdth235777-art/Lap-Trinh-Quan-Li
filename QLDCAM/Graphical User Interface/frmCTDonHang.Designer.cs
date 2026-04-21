@@ -114,7 +114,7 @@
             this.cbKH.Name = "cbKH";
             this.cbKH.Size = new System.Drawing.Size(313, 27);
             this.cbKH.TabIndex = 3;
-            this.cbKH.ValueMember = "MaKH";
+            this.cbKH.ValueMember = "MaKhachHang";
             // 
             // dtpNgayLap
             // 
@@ -352,6 +352,8 @@
             this.Name = "frmCTDonHang";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chi tiết hoá đơn";
+            // Hook load event
+            this.Load += new System.EventHandler(this.frmChiTietHoaDon_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

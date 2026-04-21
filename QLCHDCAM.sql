@@ -54,7 +54,7 @@ CREATE TABLE DonHang (
     MaNhanVien INT,
     TongTien DECIMAL(18, 2),
     PhiVanChuyen DECIMAL(18, 2) DEFAULT 0,
-    TrangThai NVARCHAR(50),
+    Chitiet ,
     CONSTRAINT FK_DonHang_KhachHang FOREIGN KEY (MaKhachHang) REFERENCES KhachHang(MaKhachHang),
     CONSTRAINT FK_DonHang_NhanVien FOREIGN KEY (MaNhanVien) REFERENCES NhanVien(MaNhanVien)
 );
