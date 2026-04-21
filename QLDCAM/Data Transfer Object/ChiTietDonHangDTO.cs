@@ -8,8 +8,6 @@ namespace QLDCAM.Data_Transfer_Object
 {
     internal class ChiTietDonHangDTO
     {
-        public int MaChiTiet { get; set; }
-        public int MaDonHang { get; set; }
         public int MaSanPham { get; set; }
         public string TenSanPham { get; set; }
         public int SoLuong { get; set; }

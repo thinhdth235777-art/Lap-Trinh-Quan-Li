@@ -11,77 +11,50 @@ namespace QLDCAM.Data_Access_Layer
 {
     internal class DonHangDAL
     {
-        DBConnect db=new DBConnect();
-
-        public DataTable LayDanhSachHoaDon()
+        DBConnect db;
+        // Lấy danh sách hóa đơn hiển thị lên GridView ở Form chính
+        public DataTable LayDSHoaDon()
         {
-                // Join các bảng để lấy tên nhân viên và khách hàng
-                string sql = @"SELECT dh.MaDonHang, nv.HoTen as TenNhanVien, kh.HoTen as TenKhachHang, 
-                          dh.NgayDatHang, dh.TongTien 
-                          FROM DonHang dh
-                          JOIN NhanVien nv ON dh.MaNhanVien = nv.MaNhanVien
-                          JOIN KhachHang kh ON dh.MaKhachHang = kh.MaKhachHang";
+            string sql = "SELECT dh.MaDonHang, kh.HoTen as TenKH, nv.HoTen as TenNV, dh.NgayLap, dh.TongTien FROM DonHang dh JOIN KhachHang kh ON dh.MaKhachHang = kh.MaKhachHang JOIN NhanVien nv ON dh.MaNhanVien = nv.MaNhanVien";
             return db.LayBangDuLieu(sql);
         }
 
-        public DataTable LayChiTietHoaDon(int maHD)
+        public DataTable LayChiTietTheoMa(int maHD)
         {
-                string sql = @"SELECT ct.MaSanPham, sp.TenSanPham, ct.SoLuong, ct.DonGia, (ct.SoLuong * ct.DonGia) as ThanhTien
-                          FROM ChiTietDonHang ct
-                          JOIN SanPham sp ON ct.MaSanPham = sp.MaSanPham
-                          WHERE ct.MaDonHang = @ma";
-                SqlCommand cmd = new SqlCommand(sql);
-                cmd.Parameters.AddWithValue("@ma", maHD);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                return dt;        
-        }
-        // Thêm hóa đơn mới
-        public bool ThemDH(DonHangDTO dh)
-        {
-                string sql = "INSERT INTO DonHang (MaNhanVien, MaKhachHang, NgayDatHang, TongTien) VALUES (@manv, @makh, @ngay, @tongtien)";
-                SqlCommand cmd = new SqlCommand(sql);
-                cmd.Parameters.AddWithValue("@manv", dh.MaNhanVien);
-                cmd.Parameters.AddWithValue("@makh", dh.MaKhachHang);
-                cmd.Parameters.AddWithValue("@ngay", dh.NgayDatHang);
-                cmd.Parameters.AddWithValue("@tongtien", dh.TongTien);
-                return cmd.ExecuteNonQuery() > 0;
+            string sql = $"SELECT sp.TenSanPham, ct.SoLuong, ct.DonGia, (ct.SoLuong*ct.DonGia) as ThanhTien FROM ChiTietDonHang ct JOIN SanPham sp ON ct.MaSanPham = sp.MaSanPham WHERE ct.MaDonHang = {maHD}";
+            return db.LayBangDuLieu(sql);
         }
 
-        // Sửa hóa đơn (thường chỉ sửa ngày hoặc khách hàng, ít khi sửa tổng tiền thủ công)
-        public bool SuaDH(DonHangDTO dh)
+        public bool LuuHoaDonFull(DonHangDTO hd, List<ChiTietDonHangDTO> ds)
         {
-                string sql = "UPDATE DonHang SET MaKhachHang=@makh, NgayDatHang=@ngay WHERE MaDonHang=@ma";
-                SqlCommand cmd = new SqlCommand(sql);
-                cmd.Parameters.AddWithValue("@makh", dh.MaKhachHang);
-                cmd.Parameters.AddWithValue("@ngay", dh.NgayDatHang);
-                cmd.Parameters.AddWithValue("@ma", dh.MaDonHang);
-                return cmd.ExecuteNonQuery() > 0;
-        }
-
-        // Xóa hóa đơn (Phải xóa ChiTietDonHang trước vì ràng buộc khóa ngoại)
-        public bool XoaDH(int maDH)
-        {
+            try
+            {
+                db.OpenConn();
+                SqlTransaction trans = conn.BeginTransaction();
                 try
                 {
-                    // 1. Xóa chi tiết
-                    string sqlCT = "DELETE FROM ChiTietDonHang WHERE MaDonHang = @ma";
-                    SqlCommand cmdCT = new SqlCommand(sqlCT);
-                    cmdCT.Parameters.AddWithValue("@ma", maDH);
-                    cmdCT.ExecuteNonQuery();
+                    // 1. Thêm Đơn Hàng
+                    string sqlHD = "INSERT INTO DonHang (MaKhachHang, MaNhanVien, NgayLap, TongTien, PhiVanChuyen, TrangThai) OUTPUT INSERTED.MaDonHang VALUES (@makh, @manv, @ngay, @tong, @phi, N'Đã xong')";
+                    SqlCommand cmdHD = new SqlCommand(sqlHD, conn, trans);
+                    cmdHD.Parameters.AddWithValue("@makh", hd.MaKhachHang);
+                    cmdHD.Parameters.AddWithValue("@manv", hd.MaNhanVien);
+                    cmdHD.Parameters.AddWithValue("@ngay", DateTime.Now);
+                    cmdHD.Parameters.AddWithValue("@tong", hd.TongTien);
+                    cmdHD.Parameters.AddWithValue("@phi", hd.PhiVanChuyen);
+                    int maHD = (int)cmdHD.ExecuteScalar();
 
-                    // 2. Xóa đơn hàng
-                    string sqlDH = "DELETE FROM DonHang WHERE MaDonHang = @ma";
-                    SqlCommand cmdDH = new SqlCommand(sqlDH);
-                    cmdDH.Parameters.AddWithValue("@ma", maDH);
-                    cmdDH.ExecuteNonQuery();
-                    return true;
+                    // 2. Thêm Chi tiết & Trừ kho
+                    foreach (var item in ds)
+                    {
+                        new SqlCommand($"INSERT INTO ChiTietDonHang VALUES ({maHD}, {item.MaSanPham}, {item.SoLuong}, {item.DonGia})", conn, trans).ExecuteNonQuery();
+                        new SqlCommand($"UPDATE SanPham SET SoLuongTon = SoLuongTon - {item.SoLuong} WHERE MaSanPham = {item.MaSanPham}", conn, trans).ExecuteNonQuery();
+                    }
+                    trans.Commit(); return true;
                 }
-                catch
-                {
-                    return false;
-                }
+                catch { trans.Rollback(); return false; }
+            }
+            finally { db.CloseConn(); }
         }
     }
+}
 }

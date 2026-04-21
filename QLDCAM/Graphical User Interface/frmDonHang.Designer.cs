@@ -63,7 +63,6 @@
             this.dtgHoadon.Name = "dtgHoadon";
             this.dtgHoadon.Size = new System.Drawing.Size(835, 329);
             this.dtgHoadon.TabIndex = 0;
-            this.dtgHoadon.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgHoadon_CellContentClick);
             // 
             // btnThem
             // 
@@ -73,7 +72,6 @@
             this.btnThem.TabIndex = 1;
             this.btnThem.Text = "Lập hoá đơn mới";
             this.btnThem.UseVisualStyleBackColor = true;
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnSua
             // 
@@ -83,7 +81,6 @@
             this.btnSua.TabIndex = 1;
             this.btnSua.Text = "Sửa...";
             this.btnSua.UseVisualStyleBackColor = true;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 

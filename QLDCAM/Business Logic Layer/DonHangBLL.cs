@@ -14,26 +14,17 @@ namespace QLDCAM.Business_Logic_Layer
     {
         DonHangDAL dal = new DonHangDAL();
 
-        public DataTable LayDS() => dal.LayDanhSachHoaDon();
+        public DataTable LayDSKhachHang() => dal.LayBangDuLieu("SELECT * FROM KhachHang");
+        public DataTable LayDSSanPham() => dal.LayBangDuLieu("SELECT * FROM SanPham");
+        public DataTable LayDSHoaDon() => dal.LayDSHoaDon();
+        public DataTable LayChiTiet(int maHD) => dal.LayChiTietTheoMa(maHD);
 
-        public DataTable LayCT(int maHD) => dal.LayChiTietHoaDon(maHD);
-        public string LuuHoaDon(DonHangDTO dh, string hanhDong)
+        public decimal TinhPhiShip(string tinhThanh)
         {
-            if (dh.MaKhachHang <= 0) return "Chưa chọn khách hàng!";
-
-            if (hanhDong == "THEM")
-            {
-                return dal.ThemDH(dh) ? "Thành công" : "Thất bại";
-            }
-            else
-            {
-                return dal.SuaDH(dh) ? "Thành công" : "Thất bại";
-            }
+            // Logic: Khách ở An Giang phí = 0, tỉnh khác 30k
+            return (tinhThanh != null && tinhThanh.Contains("An Giang")) ? 0 : 30000;
         }
 
-        public bool XoaHoaDon(int maDH)
-        {
-            return dal.XoaDH(maDH);
-        }
+        public bool LuuHoaDon(DonHangDTO hd, List<ChiTietDonHangDTO> ds) => dal.LuuHoaDonFull(hd, ds);
     }
 }

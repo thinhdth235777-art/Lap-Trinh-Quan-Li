@@ -1,4 +1,5 @@
-﻿using QLDCAM.Data_Access_Layer;
+﻿using QLDCAM.Business_Logic_Layer;
+using QLDCAM.Data_Access_Layer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,28 +14,40 @@ namespace QLDCAM.Graphical_User_Interface
 {
     public partial class frmCTDonHang : Form
     {
-        public frmCTDonHang()
+        int _maHD;
+        DonHangBLL bll = new DonHangBLL();
+
+        // Constructor nhận mã hóa đơn từ Form chính
+        public frmCTDonHang(int maHD)
         {
             InitializeComponent();
+            this._maHD = maHD;
         }
-        DBConnect db;
-        public int id = 0;
-        public void gandulieu(ComboBox cbo, DataTable nguondulieu, string hienthi, string luutru)
+
+        private void frmChiTietHoaDon_Load(object sender, EventArgs e)
         {
-            cbo.DataSource = nguondulieu;
-            cbo.DisplayMember = hienthi;
-            cbo.ValueMember = luutru;
+            txtMaHD.Text = _maHD.ToString();
+            LoadDuLieuChiTiet();
         }
-        void setButton()
+
+        void LoadDuLieuChiTiet()
         {
-            if(id==0 && dtgHoaDon.Rows.Count==0)
+            // Gọi BLL để lấy các món hàng của hóa đơn này
+            DataTable dt = bll.LayChiTiet(_maHD);
+            dtgHoaDon.DataSource = dt;
+
+            // Tính tổng tiền hiển thị trên form chi tiết (nếu anh có ô Tổng tiền)
+            decimal tong = 0;
+            foreach (DataRow row in dt.Rows)
             {
-                cbKH.Text = "";
-                cbNV.Text = "";
-                cbSanPham.Text = "";
-                numSL.Value = 1;
-            }   
-            btn
+                tong += Convert.ToDecimal(row["ThanhTien"]);
+            }
+            txtTong.Text = tong.ToString("N0") + " VNĐ";
+        }
+
+        private void btnDong_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

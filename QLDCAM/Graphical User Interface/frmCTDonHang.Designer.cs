@@ -31,12 +31,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtMaHD = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbNV = new System.Windows.Forms.ComboBox();
             this.cbKH = new System.Windows.Forms.ComboBox();
             this.dtpNgayLap = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.numSL = new System.Windows.Forms.NumericUpDown();
             this.cbSanPham = new System.Windows.Forms.ComboBox();
             this.btnThem = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,13 +52,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnLuu = new System.Windows.Forms.Button();
-            this.cbNV = new System.Windows.Forms.ComboBox();
-            this.numSL = new System.Windows.Forms.NumericUpDown();
+            this.btnXoa = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgHoaDon)).BeginInit();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numSL)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -93,6 +94,16 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin chung";
+            // 
+            // cbNV
+            // 
+            this.cbNV.DisplayMember = "HoTen";
+            this.cbNV.FormattingEnabled = true;
+            this.cbNV.Location = new System.Drawing.Point(126, 84);
+            this.cbNV.Name = "cbNV";
+            this.cbNV.Size = new System.Drawing.Size(313, 27);
+            this.cbNV.TabIndex = 3;
+            this.cbNV.ValueMember = "MaKH";
             // 
             // cbKH
             // 
@@ -142,6 +153,7 @@
             // 
             this.groupBox2.Controls.Add(this.numSL);
             this.groupBox2.Controls.Add(this.cbSanPham);
+            this.groupBox2.Controls.Add(this.btnXoa);
             this.groupBox2.Controls.Add(this.btnThem);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label8);
@@ -153,6 +165,29 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Chọn sản phẩm";
             // 
+            // numSL
+            // 
+            this.numSL.Location = new System.Drawing.Point(119, 64);
+            this.numSL.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numSL.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numSL.Name = "numSL";
+            this.numSL.Size = new System.Drawing.Size(159, 26);
+            this.numSL.TabIndex = 4;
+            this.numSL.ThousandsSeparator = true;
+            this.numSL.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // cbSanPham
             // 
             this.cbSanPham.FormattingEnabled = true;
@@ -163,7 +198,7 @@
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(270, 104);
+            this.btnThem.Location = new System.Drawing.Point(40, 104);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(162, 40);
             this.btnThem.TabIndex = 2;
@@ -283,38 +318,14 @@
             this.btnLuu.Text = "Lưu hoá đơn";
             this.btnLuu.UseVisualStyleBackColor = true;
             // 
-            // cbNV
+            // btnXoa
             // 
-            this.cbNV.DisplayMember = "HoTen";
-            this.cbNV.FormattingEnabled = true;
-            this.cbNV.Location = new System.Drawing.Point(126, 84);
-            this.cbNV.Name = "cbNV";
-            this.cbNV.Size = new System.Drawing.Size(313, 27);
-            this.cbNV.TabIndex = 3;
-            this.cbNV.ValueMember = "MaKH";
-            // 
-            // numSL
-            // 
-            this.numSL.Location = new System.Drawing.Point(119, 64);
-            this.numSL.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numSL.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numSL.Name = "numSL";
-            this.numSL.Size = new System.Drawing.Size(159, 26);
-            this.numSL.TabIndex = 4;
-            this.numSL.ThousandsSeparator = true;
-            this.numSL.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.btnXoa.Location = new System.Drawing.Point(237, 104);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(162, 40);
+            this.btnXoa.TabIndex = 2;
+            this.btnXoa.Text = "Xoá";
+            this.btnXoa.UseVisualStyleBackColor = true;
             // 
             // frmCTDonHang
             // 
@@ -333,10 +344,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgHoaDon)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numSL)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -367,5 +378,6 @@
         private System.Windows.Forms.Button btnLuu;
         private System.Windows.Forms.ComboBox cbNV;
         private System.Windows.Forms.NumericUpDown numSL;
+        private System.Windows.Forms.Button btnXoa;
     }
 }
