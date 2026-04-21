@@ -76,5 +76,10 @@ namespace QLDCAM.Graphical_User_Interface
                 }
             }
         }
+
+        private void btnThem_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

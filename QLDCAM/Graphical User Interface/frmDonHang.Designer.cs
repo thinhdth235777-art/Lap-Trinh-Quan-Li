@@ -58,10 +58,11 @@
             this.dtgHoadon.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtgHoadon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgHoadon.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtgHoadon.Location = new System.Drawing.Point(4, 23);
+            this.dtgHoadon.Location = new System.Drawing.Point(4, 27);
             this.dtgHoadon.MultiSelect = false;
             this.dtgHoadon.Name = "dtgHoadon";
-            this.dtgHoadon.Size = new System.Drawing.Size(835, 329);
+            this.dtgHoadon.RowHeadersWidth = 51;
+            this.dtgHoadon.Size = new System.Drawing.Size(835, 325);
             this.dtgHoadon.TabIndex = 0;
             // 
             // btnThem
@@ -72,6 +73,7 @@
             this.btnThem.TabIndex = 1;
             this.btnThem.Text = "Lập hoá đơn mới";
             this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click_1);
             // 
             // btnSua
             // 
@@ -111,7 +113,7 @@
             // 
             // frmDonHang
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(871, 433);
             this.Controls.Add(this.btnIn);

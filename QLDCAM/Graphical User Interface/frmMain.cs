@@ -27,8 +27,8 @@ namespace QLDCAM.Graphical_User_Interface
             activeForm = childForm;
 
             childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None; 
-            childForm.Dock = DockStyle.Fill; 
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
 
             pnlContent.Controls.Add(childForm);
             pnlContent.Tag = childForm;
@@ -36,24 +36,24 @@ namespace QLDCAM.Graphical_User_Interface
             childForm.Show();
         }
 
- 
+
 
         private void frmMain_Load(object sender, EventArgs e)
         {
             //OpenChildForm(new frmDashboard());
-            
+
         }
 
-    
+
         private void btnMenuKho_Click(object sender, EventArgs e)
         {
             if (pnlMenuKho.Height == 45)
             {
-                pnlMenuKho.Height = 180; 
+                pnlMenuKho.Height = 180;
             }
             else
             {
-                pnlMenuKho.Height = 45;  
+                pnlMenuKho.Height = 45;
             }
         }
 
@@ -85,7 +85,7 @@ namespace QLDCAM.Graphical_User_Interface
 
         private void btnMenuThongKe_Click(object sender, EventArgs e)
         {
-          if (pnlMenuThongKe.Height == 45)
+            if (pnlMenuThongKe.Height == 45)
             {
                 pnlMenuThongKe.Height = 180;
             }
@@ -138,6 +138,21 @@ namespace QLDCAM.Graphical_User_Interface
         private void btnMenuHome_Click(object sender, EventArgs e)
         {
             OpenChildForm(new frmDashboard());
+        }
+
+        private void btnLapHoaDon_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmCTDonHang(0));
+        }
+
+        private void btnDanhSachHoaDon_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmDonHang());
+        }
+
+        private void btnNhapHang_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmNhapHang());
         }
     }
 }

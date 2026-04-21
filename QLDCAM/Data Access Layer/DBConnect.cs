@@ -11,7 +11,7 @@ namespace QLDCAM.Data_Access_Layer
 {
     internal class DBConnect
     {
-        protected SqlConnection conn = new SqlConnection(@"Data Source=ADMIN-PC;Initial Catalog=QLCHDungCuAmNhac;Integrated Security=True");
+        protected SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-2947EDG;Initial Catalog=QLCHDungCuAmNhac;Integrated Security=True");
 
         public void OpenConn()
         {

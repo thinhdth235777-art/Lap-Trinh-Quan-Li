@@ -253,7 +253,7 @@
             this.pnlMenuBanHang.Location = new System.Drawing.Point(3, 160);
             this.pnlMenuBanHang.Name = "pnlMenuBanHang";
             this.pnlMenuBanHang.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.pnlMenuBanHang.Size = new System.Drawing.Size(200, 45);
+            this.pnlMenuBanHang.Size = new System.Drawing.Size(200, 366);
             this.pnlMenuBanHang.TabIndex = 3;
             // 
             // btnNhapHang
@@ -268,6 +268,7 @@
             this.btnNhapHang.TabIndex = 6;
             this.btnNhapHang.Text = "Nhập Hàng";
             this.btnNhapHang.UseVisualStyleBackColor = true;
+            this.btnNhapHang.Click += new System.EventHandler(this.btnNhapHang_Click);
             // 
             // btnDanhSachHoaDon
             // 
@@ -281,6 +282,7 @@
             this.btnDanhSachHoaDon.TabIndex = 5;
             this.btnDanhSachHoaDon.Text = "Danh sách hóa đơn";
             this.btnDanhSachHoaDon.UseVisualStyleBackColor = true;
+            this.btnDanhSachHoaDon.Click += new System.EventHandler(this.btnDanhSachHoaDon_Click);
             // 
             // btnLapHoaDon
             // 
@@ -294,6 +296,7 @@
             this.btnLapHoaDon.TabIndex = 4;
             this.btnLapHoaDon.Text = "Lập hóa đơn";
             this.btnLapHoaDon.UseVisualStyleBackColor = true;
+            this.btnLapHoaDon.Click += new System.EventHandler(this.btnLapHoaDon_Click);
             // 
             // btnMenuBanHang
             // 
@@ -314,7 +317,7 @@
             this.pnlMenuThongKe.Controls.Add(this.btnSanPhamBanChay);
             this.pnlMenuThongKe.Controls.Add(this.btnDoanhThuTheoThang);
             this.pnlMenuThongKe.Controls.Add(this.btnMenuThongKe);
-            this.pnlMenuThongKe.Location = new System.Drawing.Point(3, 211);
+            this.pnlMenuThongKe.Location = new System.Drawing.Point(3, 532);
             this.pnlMenuThongKe.Name = "pnlMenuThongKe";
             this.pnlMenuThongKe.Size = new System.Drawing.Size(200, 45);
             this.pnlMenuThongKe.TabIndex = 4;

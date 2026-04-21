@@ -17,7 +17,7 @@ namespace QLDCAM
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmDonHang());
+            Application.Run(new frmLogin());
         }
     }
 }

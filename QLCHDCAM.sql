@@ -146,3 +146,18 @@ WHERE EXISTS (
     WHERE ChiTietDonHang.MaDonHang = DonHang.MaDonHang
 );
 GO
+CREATE TABLE NhaCungCap (
+    MaNhaCungCap INT PRIMARY KEY IDENTITY(1,1),
+    TenNhaCungCap NVARCHAR(200) NOT NULL,
+    SoDienThoai VARCHAR(15),
+    Email VARCHAR(100),
+    DiaChi NVARCHAR(255)
+);
+GO
+
+-- 2. Chèn dữ liệu mẫu để ComboBox có cái mà hiển thị
+INSERT INTO NhaCungCap (TenNhaCungCap, SoDienThoai, Email, DiaChi) VALUES 
+(N'Công ty Nhạc cụ Yamaha Việt Nam', '0281234567', 'info@yamaha.com.vn', N'Quận 1, TP.HCM'),
+(N'Nhà phân phối Guitar Fender Hải Đăng', '0908889999', 'haidang@fender.vn', N'Quận Tân Bình, TP.HCM'),
+(N'Kho sỉ Piano Roland Miền Nam', '0243334445', 'kho@roland.vn', N'Quận Ba Đình, Hà Nội');
+GO

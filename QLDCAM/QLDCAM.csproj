@@ -50,6 +50,7 @@
     <Compile Include="Business Logic Layer\DonHangBLL.cs" />
     <Compile Include="Business Logic Layer\KhachHangBLL.cs" />
     <Compile Include="Business Logic Layer\LoaiSanPhamBLL.cs" />
+    <Compile Include="Business Logic Layer\NhaCungCapBLL.cs" />
     <Compile Include="Business Logic Layer\NhanVienBLL.cs" />
     <Compile Include="Business Logic Layer\SanPhamBLL.cs" />
     <Compile Include="Business Logic Layer\TaiKhoanBLL.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Data Access Layer\DonHangDAL.cs" />
     <Compile Include="Data Access Layer\KhachHangDAL.cs" />
     <Compile Include="Data Access Layer\LoaiSanPhamDAL.cs" />
+    <Compile Include="Data Access Layer\NhaCungCapDAL.cs" />
     <Compile Include="Data Access Layer\NhanVienDAL.cs" />
     <Compile Include="Data Access Layer\SanPhamDAL.cs" />
     <Compile Include="Data Access Layer\TaiKhoanDAL.cs" />
@@ -121,6 +123,12 @@
     <Compile Include="Graphical User Interface\frmNhanVien.Designer.cs">
       <DependentUpon>frmNhanVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="Graphical User Interface\frmNhapHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Graphical User Interface\frmNhapHang.Designer.cs">
+      <DependentUpon>frmNhapHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Graphical User Interface\frmRegister.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Graphical User Interface\frmNhanVien.resx">
       <DependentUpon>frmNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Graphical User Interface\frmNhapHang.resx">
+      <DependentUpon>frmNhapHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Graphical User Interface\frmRegister.resx">
       <DependentUpon>frmRegister.cs</DependentUpon>
