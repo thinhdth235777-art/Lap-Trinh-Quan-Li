@@ -9,10 +9,11 @@ namespace QLDCAM.Data_Transfer_Object
     internal class DonHangDTO
     {
         public int MaDonHang { get; set; }
-        public DateTime NgayLap { get; set; }
-        public int MaKH { get; set; }
-        public int MaNV { get; set; }
+        public int MaNhanVien { get; set; }
+        public int MaKhachHang { get; set; }
+        public DateTime NgayDatHang { get; set; }
         public decimal TongTien { get; set; }
-        public decimal PhiShip { get; set; }
+        public string TenNhanVien { get; set; }
+        public string TenKhachHang { get; set; }
     }
 }

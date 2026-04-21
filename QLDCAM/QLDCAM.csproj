@@ -79,6 +79,12 @@
     <Compile Include="Graphical User Interface\frmDashboard.Designer.cs">
       <DependentUpon>frmDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Graphical User Interface\frmCTDonHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Graphical User Interface\frmCTDonHang.Designer.cs">
+      <DependentUpon>frmCTDonHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Graphical User Interface\frmDonHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +151,9 @@
     <Compile Include="SessionUser.cs" />
     <EmbeddedResource Include="Graphical User Interface\frmDashboard.resx">
       <DependentUpon>frmDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Graphical User Interface\frmCTDonHang.resx">
+      <DependentUpon>frmCTDonHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Graphical User Interface\frmDonHang.resx">
       <DependentUpon>frmDonHang.cs</DependentUpon>

@@ -118,3 +118,31 @@ INSERT INTO KhachHang (HoTen, SoDienThoai, Email, DiaChi, TinhThanh) VALUES
 (N'Lê Văn C', '0923456789', 'c@gmail.com', N'Quận 1', N'TP.HCM'),
 (N'Phạm Thị D', '0934567890', 'd@gmail.com', N'Hải Châu', N'Đà Nẵng'),
 (N'Hoàng Văn E', '0945678901', 'e@gmail.com', N'Hoàn Kiếm', N'Hà Nội');
+GO
+INSERT INTO DonHang (MaNhanVien, MaKhachHang, NgayLap, TongTien)
+VALUES (1, 1, '2026-04-21', 0),
+       (2, 2, '2026-04-20', 0);
+GO
+-- Chi tiết cho đơn hàng 1: Mua 1 đàn Guitar (MaSP=1), 2 bộ dây (MaSP=2)
+INSERT INTO ChiTietDonHang (MaDonHang, MaSanPham, SoLuong, DonGia)
+VALUES (1, 1, 1, 5000000);
+Go
+INSERT INTO ChiTietDonHang (MaDonHang, MaSanPham, SoLuong, DonGia)
+VALUES (1, 2, 2, 200000);
+GO
+-- Chi tiết cho đơn hàng 2: Mua 1 cây Piano (MaSP=3)
+INSERT INTO ChiTietDonHang (MaDonHang, MaSanPham, SoLuong, DonGia)
+VALUES (2, 3, 1, 15000000);
+GO
+
+UPDATE DonHang
+SET TongTien = (
+    SELECT SUM(SoLuong * DonGia)
+    FROM ChiTietDonHang
+    WHERE ChiTietDonHang.MaDonHang = DonHang.MaDonHang
+)
+WHERE EXISTS (
+    SELECT 1 FROM ChiTietDonHang 
+    WHERE ChiTietDonHang.MaDonHang = DonHang.MaDonHang
+);
+GO

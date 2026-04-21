@@ -13,52 +13,28 @@ namespace QLDCAM.Data_Access_Layer
     {
         DBConnect db=new DBConnect();
 
-        public DataTable LayTatCaDonHang()
+        public DataTable LayDanhSachHoaDon()
         {
-            string sql = "SELECT * FROM DonHang";
+                // Join các bảng để lấy tên nhân viên và khách hàng
+                string sql = @"SELECT dh.MaDonHang, nv.HoTen as TenNhanVien, kh.HoTen as TenKhachHang, 
+                          dh.NgayDatHang, dh.TongTien 
+                          FROM DonHang dh
+                          JOIN NhanVien nv ON dh.MaNhanVien = nv.MaNhanVien
+                          JOIN KhachHang kh ON dh.MaKhachHang = kh.MaKhachHang";
             return db.LayBangDuLieu(sql);
         }
-        public int ThemDonHang(DonHangDTO hd)
+
+        public DataTable LayChiTietHoaDon(int maHD)
         {
-            try
-            {
-                string sql = @"INSERT INTO DonHang(NgayLap, MaKH, TongTien)
-                       OUTPUT INSERTED.MaHD
-                       VALUES(@NgayLap, @MaKH, @TongTien)";
-
+                string sql = @"SELECT ct.MaSanPham, sp.TenSanPham, ct.SoLuong, ct.DonGia, (ct.SoLuong * ct.DonGia) as ThanhTien
+                          FROM ChiTietDonHang ct
+                          JOIN SanPham sp ON ct.MaSanPham = sp.MaSanPham
+                          WHERE ct.MaDonHang = @ma";
                 SqlCommand cmd = new SqlCommand(sql);
-
-                cmd.Parameters.AddWithValue("@NgayLap", hd.NgayLap);
-                cmd.Parameters.AddWithValue("@MaKH", hd.MaKH);
-                cmd.Parameters.AddWithValue("@TongTien", hd.TongTien);
-
-                return (int)cmd.ExecuteScalar();
-            }
-            catch
-            {
-                return -1;
-            }
-        }
-        public bool ThemChiTietDonHang(ChiTietDonHangDTO ct)
-        {
-            try
-            {
-                string sql = @"INSERT INTO ChiTietDonHang(MaDonHang, MaSP, SoLuong, DonGia)
-                       VALUES(@MaDH, @MaSP, @SoLuong, @DonGia)";
-
-                SqlCommand cmd = new SqlCommand(sql);
-
-                cmd.Parameters.AddWithValue("@MaDH", ct.MaDonHang);
-                cmd.Parameters.AddWithValue("@MaSP", ct.MaSanPham);
-                cmd.Parameters.AddWithValue("@SoLuong", ct.SoLuong);
-                cmd.Parameters.AddWithValue("@DonGia", ct.DonGia);
-
-                return cmd.ExecuteNonQuery() > 0;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+                cmd.Parameters.AddWithValue("@ma", maHD);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;        }
     }
 }
