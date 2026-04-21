@@ -40,6 +40,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.numSL = new System.Windows.Forms.NumericUpDown();
             this.cbSanPham = new System.Windows.Forms.ComboBox();
+            this.btnXoa = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -52,7 +53,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnLuu = new System.Windows.Forms.Button();
-            this.btnXoa = new System.Windows.Forms.Button();
+            this.btnThoat = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSL)).BeginInit();
@@ -196,6 +197,15 @@
             this.cbSanPham.Size = new System.Drawing.Size(313, 27);
             this.cbSanPham.TabIndex = 3;
             // 
+            // btnXoa
+            // 
+            this.btnXoa.Location = new System.Drawing.Point(237, 104);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(162, 40);
+            this.btnXoa.TabIndex = 2;
+            this.btnXoa.Text = "Xoá";
+            this.btnXoa.UseVisualStyleBackColor = true;
+            // 
             // btnThem
             // 
             this.btnThem.Location = new System.Drawing.Point(40, 104);
@@ -311,21 +321,22 @@
             // btnLuu
             // 
             this.btnLuu.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLuu.Location = new System.Drawing.Point(712, 481);
+            this.btnLuu.Location = new System.Drawing.Point(605, 481);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(113, 67);
             this.btnLuu.TabIndex = 2;
             this.btnLuu.Text = "Lưu hoá đơn";
             this.btnLuu.UseVisualStyleBackColor = true;
             // 
-            // btnXoa
+            // btnThoat
             // 
-            this.btnXoa.Location = new System.Drawing.Point(237, 104);
-            this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(162, 40);
-            this.btnXoa.TabIndex = 2;
-            this.btnXoa.Text = "Xoá";
-            this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThoat.Location = new System.Drawing.Point(785, 481);
+            this.btnThoat.Name = "btnThoat";
+            this.btnThoat.Size = new System.Drawing.Size(113, 67);
+            this.btnThoat.TabIndex = 2;
+            this.btnThoat.Text = "Thoát";
+            this.btnThoat.UseVisualStyleBackColor = true;
             // 
             // frmCTDonHang
             // 
@@ -333,6 +344,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(963, 601);
             this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnLuu);
             this.Controls.Add(this.dtgHoaDon);
             this.Controls.Add(this.groupBox2);
@@ -379,5 +391,6 @@
         private System.Windows.Forms.ComboBox cbNV;
         private System.Windows.Forms.NumericUpDown numSL;
         private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.Button btnThoat;
     }
 }

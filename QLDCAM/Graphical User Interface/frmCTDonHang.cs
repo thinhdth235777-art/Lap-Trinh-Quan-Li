@@ -45,7 +45,7 @@ namespace QLDCAM.Graphical_User_Interface
             txtTong.Text = tong.ToString("N0") + " VNĐ";
         }
 
-        private void btnDong_Click(object sender, EventArgs e)
+        private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
         }

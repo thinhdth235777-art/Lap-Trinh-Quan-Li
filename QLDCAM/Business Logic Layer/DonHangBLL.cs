@@ -26,5 +26,10 @@ namespace QLDCAM.Business_Logic_Layer
         }
 
         public bool LuuHoaDon(DonHangDTO hd, List<ChiTietDonHangDTO> ds) => dal.LuuHoaDonFull(hd, ds);
+        public bool HuyDonHang(int maHD)
+        {
+            // Anh có thể thêm logic kiểm tra xem hóa đơn đã quá 24h chưa thì không cho xóa
+            return dal.XoaHoaDon(maHD);
+        }
     }
 }

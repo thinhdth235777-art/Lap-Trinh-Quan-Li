@@ -16,7 +16,7 @@ namespace QLDCAM.Graphical_User_Interface
     public partial class frmDonHang : Form
     {
         DonHangBLL bll = new DonHangBLL();
-
+        int maHD;
         public frmDonHang()
         {
             InitializeComponent();
@@ -43,15 +43,38 @@ namespace QLDCAM.Graphical_User_Interface
                 int maHD = Convert.ToInt32(dtgHoadon.Rows[e.RowIndex].Cells["MaDonHang"].Value);
 
                 // Mở Form Chi Tiết và truyền mã vào
-                frmCTDonHang fChiTiet = new frmCTDonHang();
+                frmCTDonHang fChiTiet = new frmCTDonHang(maHD);
                 fChiTiet.ShowDialog();
             }
         }
-
-        // Nút làm mới danh sách
-        private void btnLamMoi_Click(object sender, EventArgs e)
+        // 1. NÚT THÊM: Mở form bán hàng mới
+        private void btnThem_Click(object sender, EventArgs e)
         {
-            LoadDSHoaDon();
+            using (frmCTDonHang chiTiet = new frmCTDonHang(maHD))
+            {
+                chiTiet.ShowDialog();
+            }    
+        }
+
+        // 2. NÚT XÓA: Hủy hóa đơn và hoàn kho
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            if (dtgHoadon.CurrentRow != null)
+            {
+                int maHD = Convert.ToInt32(dtgHoadon.CurrentRow.Cells["MaDonHang"].Value);
+                DialogResult dr = MessageBox.Show($"Bạn có chắc muốn HỦY hóa đơn {maHD}? Hàng sẽ được trả về kho!",
+                                                 "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dr == DialogResult.Yes)
+                {
+                    if (bll.HuyDonHang(maHD))
+                    {
+                        MessageBox.Show("Đã hủy hóa đơn thành công!");
+                        LoadDSHoaDon();
+                    }
+                    else MessageBox.Show("Lỗi khi hủy hóa đơn!");
+                }
+            }
         }
     }
 }
