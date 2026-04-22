@@ -17,7 +17,7 @@ namespace QLDCAM.Graphical_User_Interface
         int _maHD;
         DonHangBLL bll = new DonHangBLL();
         QLDCAM.Business_Logic_Layer.KhachHangBLL khBLL = new QLDCAM.Business_Logic_Layer.KhachHangBLL();
-
+        NhanVienBLL nvBLL = new NhanVienBLL();
         // Constructor nhận mã hóa đơn từ Form chính
         public frmCTDonHang(int maHD)
         {
@@ -30,6 +30,7 @@ namespace QLDCAM.Graphical_User_Interface
             txtMaHD.Text = _maHD.ToString();
             LoadCustomers();
             LoadDuLieuChiTiet();
+            LoadStaffs();
         }
 
         void LoadCustomers()
@@ -42,6 +43,13 @@ namespace QLDCAM.Graphical_User_Interface
             cbKH.SelectedIndexChanged += cbKH_SelectedIndexChanged;
         }
 
+        void LoadStaffs()
+        {
+            DataTable dt = nvBLL.LayDanhSachNV();
+            cbNV.DataSource = dt;
+            cbNV.DisplayMember = "HoTen";
+            cbNV.ValueMember = "MaNhanVien";
+        }
         private void cbKH_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Khi chọn khách hàng, tính phí ship theo TinhThanh của khách

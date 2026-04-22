@@ -161,7 +161,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(486, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(445, 157);
+            this.groupBox2.Size = new System.Drawing.Size(380, 157);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Chọn sản phẩm";
@@ -194,23 +194,23 @@
             this.cbSanPham.FormattingEnabled = true;
             this.cbSanPham.Location = new System.Drawing.Point(119, 30);
             this.cbSanPham.Name = "cbSanPham";
-            this.cbSanPham.Size = new System.Drawing.Size(313, 27);
+            this.cbSanPham.Size = new System.Drawing.Size(239, 27);
             this.cbSanPham.TabIndex = 3;
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(237, 104);
+            this.btnXoa.Location = new System.Drawing.Point(225, 104);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(162, 40);
+            this.btnXoa.Size = new System.Drawing.Size(133, 40);
             this.btnXoa.TabIndex = 2;
             this.btnXoa.Text = "Xoá";
             this.btnXoa.UseVisualStyleBackColor = true;
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(40, 104);
+            this.btnThem.Location = new System.Drawing.Point(10, 104);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(162, 40);
+            this.btnThem.Size = new System.Drawing.Size(145, 40);
             this.btnThem.TabIndex = 2;
             this.btnThem.Text = "Thêm vào danh sách";
             this.btnThem.UseVisualStyleBackColor = true;
@@ -242,7 +242,7 @@
             this.dtgHoaDon.Location = new System.Drawing.Point(13, 176);
             this.dtgHoaDon.MultiSelect = false;
             this.dtgHoaDon.Name = "dtgHoaDon";
-            this.dtgHoaDon.Size = new System.Drawing.Size(918, 253);
+            this.dtgHoaDon.Size = new System.Drawing.Size(853, 253);
             this.dtgHoaDon.TabIndex = 3;
             // 
             // label6
@@ -321,7 +321,7 @@
             // btnLuu
             // 
             this.btnLuu.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLuu.Location = new System.Drawing.Point(605, 481);
+            this.btnLuu.Location = new System.Drawing.Point(591, 481);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(113, 67);
             this.btnLuu.TabIndex = 2;
@@ -331,7 +331,7 @@
             // btnThoat
             // 
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(785, 481);
+            this.btnThoat.Location = new System.Drawing.Point(753, 481);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(113, 67);
             this.btnThoat.TabIndex = 2;
@@ -342,7 +342,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(963, 601);
+            this.ClientSize = new System.Drawing.Size(873, 601);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnLuu);
@@ -352,7 +352,6 @@
             this.Name = "frmCTDonHang";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chi tiết hoá đơn";
-            // Hook load event
             this.Load += new System.EventHandler(this.frmChiTietHoaDon_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

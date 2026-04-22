@@ -14,7 +14,10 @@ namespace QLDCAM.Data_Access_Layer
         // Lấy danh sách hóa đơn hiển thị lên GridView ở Form chính
         public DataTable LayDSHoaDon()
         {
-            string sql = "SELECT dh.MaDonHang, kh.HoTen as TenKH, nv.HoTen as TenNV, dh.NgayLap, dh.TongTien FROM DonHang dh JOIN KhachHang kh ON dh.MaKhachHang = kh.MaKhachHang JOIN NhanVien nv ON dh.MaNhanVien = nv.MaNhanVien";
+            string sql = "SELECT dh.MaDonHang, kh.HoTen as TenKH, nv.HoTen as TenNV, dh.NgayLap, dh.TongTien " +
+                "FROM DonHang dh " +
+                "JOIN KhachHang kh ON dh.MaKhachHang = kh.MaKhachHang " +
+                "JOIN NhanVien nv ON dh.MaNhanVien = nv.MaNhanVien";
             return LayBangDuLieu(sql);
         }
 
@@ -68,7 +71,9 @@ namespace QLDCAM.Data_Access_Layer
                     try
                     {
                         // 1. Thêm Đơn Hàng
-                        string sqlHD = "INSERT INTO DonHang (MaKhachHang, MaNhanVien, NgayLap, TongTien, PhiVanChuyen, TrangThai) OUTPUT INSERTED.MaDonHang VALUES (@makh, @manv, @ngay, @tong, @phi, N'Đã xong')";
+                        string sqlHD = "INSERT INTO DonHang (MaKhachHang, MaNhanVien, NgayLap, TongTien, PhiVanChuyen, TrangThai) " +
+                            "OUTPUT INSERTED.MaDonHang " +
+                            "VALUES (@makh, @manv, @ngay, @tong, @phi, N'Đã xong')";
                         SqlCommand cmdHD = new SqlCommand(sqlHD, conn, trans);
                         cmdHD.Parameters.AddWithValue("@makh", hd.MaKhachHang);
                         cmdHD.Parameters.AddWithValue("@manv", hd.MaNhanVien);
