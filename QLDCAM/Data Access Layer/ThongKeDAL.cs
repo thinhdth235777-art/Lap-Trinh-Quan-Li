@@ -1,89 +1,72 @@
-﻿using QLDCAM.Data_Transfer_Object;
-using System;
+﻿using System;
 using System.Data;
-using System.Data.SqlClient;
-using System.Text;
 
 namespace QLDCAM.Data_Access_Layer
 {
     internal class ThongKeDAL : DBConnect
     {
-        DBConnect db = new DBConnect();
-
-        // Total revenue & invoice count & distinct customer count in a date range
-        public DataTable DoanhThuTheoKhoangThoiGian(DateTime from, DateTime to)
+        // 1. Báo cáo doanh thu
+        public DataTable DoanhThuChiTiet(DateTime from, DateTime to)
         {
             string f = from.ToString("yyyy-MM-dd");
             string t = to.ToString("yyyy-MM-dd");
-            string sql = $@"
-SELECT 
-    ISNULL(SUM(TongTien),0) AS TongDoanhThu,
-    COUNT(*) AS SoHoaDon,
-    (SELECT COUNT(DISTINCT MaKhachHang) FROM DonHang WHERE NgayLap BETWEEN '{f}' AND '{t}') AS SoKhachHang
-FROM DonHang
-WHERE NgayLap BETWEEN '{f}' AND '{t}'";
-            return db.LayBangDuLieu(sql);
+
+            string sql = $@"SELECT d.MaDonHang, d.NgayLap, k.HoTen, d.TongTien 
+                           FROM DonHang d 
+                           INNER JOIN KhachHang k ON d.MaKhachHang = k.MaKhachHang 
+                           WHERE d.NgayLap BETWEEN '{f}' AND '{t}'";
+
+            return LayBangDuLieu(sql);
         }
 
-        // Monthly revenue for a given year (Thang, TongDoanhThu)
-        public DataTable DoanhThuTheoNam(int year)
+        // 2. Báo cáo sản phẩm bán chạy
+        public DataTable TopSanPhamBanChay(DateTime from, DateTime to, int topN = 10)
         {
-            string sql = $@"
-SELECT MONTH(NgayLap) AS Thang, ISNULL(SUM(TongTien),0) AS TongDoanhThu
-FROM DonHang
-WHERE YEAR(NgayLap) = {year}
-GROUP BY MONTH(NgayLap)
-ORDER BY MONTH(NgayLap)";
-            return db.LayBangDuLieu(sql);
+            string f = from.ToString("yyyy-MM-dd");
+            string t = to.ToString("yyyy-MM-dd");
+
+            string sql = $@"SELECT TOP ({topN}) sp.MaSanPham, sp.TenSanPham, 
+                           SUM(ct.SoLuong) AS TongSoLuong, SUM(ct.SoLuong * ct.DonGia) AS ThanhTien
+                           FROM ChiTietDonHang ct
+                           JOIN SanPham sp ON ct.MaSanPham = sp.MaSanPham
+                           JOIN DonHang dh ON ct.MaDonHang = dh.MaDonHang
+                           WHERE dh.NgayLap BETWEEN '{f}' AND '{t}'
+                           GROUP BY sp.MaSanPham, sp.TenSanPham
+                           ORDER BY TongSoLuong DESC";
+
+            return LayBangDuLieu(sql);
         }
 
-        // Top N best selling products by total quantity (from ChiTietDonHang)
-        public DataTable TopSanPhamBanChay(int topN)
+        // 3. Báo cáo hàng tồn kho
+        public DataTable SanPhamTonKho(int threshold = 10)
         {
-            string sql = $@"
-SELECT TOP({topN}) ct.MaSanPham, sp.TenSanPham, ISNULL(SUM(ct.SoLuong),0) AS TongSoLuong
-FROM ChiTietDonHang ct
-INNER JOIN SanPham sp ON ct.MaSanPham = sp.MaSanPham
-GROUP BY ct.MaSanPham, sp.TenSanPham
-ORDER BY TongSoLuong DESC";
-            return db.LayBangDuLieu(sql);
+            string sql = $@"SELECT s.MaSanPham, s.TenSanPham, s.SoLuongTon, s.GiaBan, l.TenLoai
+                           FROM SanPham s
+                           JOIN LoaiSanPham l ON s.MaLoai = l.MaLoai
+                           WHERE s.SoLuongTon <= {threshold}
+                           ORDER BY s.SoLuongTon ASC";
+
+            return LayBangDuLieu(sql);
         }
 
-        // Products with low stock
-        public DataTable SanPhamSapHetHang(int threshold)
+        public DataTable LayTongHopDoanhThu(DateTime from, DateTime to)
         {
-            string sql = $@"
-SELECT MaSanPham, TenSanPham, SoLuongTon
-FROM SanPham
-WHERE SoLuongTon < {threshold}
-ORDER BY SoLuongTon ASC";
-            return db.LayBangDuLieu(sql);
+            string f = from.ToString("yyyy-MM-dd");
+            string t = to.ToString("yyyy-MM-dd");
+            // Lấy tổng tiền, số hóa đơn và số khách hàng trong 1 câu lệnh
+            string sql = $@"SELECT 
+                    ISNULL(SUM(TongTien),0) AS TongDoanhThu, 
+                    COUNT(*) AS SoHoaDon
+                    FROM DonHang WHERE NgayLap BETWEEN '{f}' AND '{t}'";
+            return LayBangDuLieu(sql);
         }
 
-        // Top N customers by total purchased amount
-        public DataTable TopKhachHang(int topN)
-        {
-            string sql = $@"
-SELECT TOP({topN}) kh.MaKhachHang, kh.HoTen, ISNULL(SUM(dh.TongTien),0) AS TongMua
-FROM DonHang dh
-INNER JOIN KhachHang kh ON dh.MaKhachHang = kh.MaKhachHang
-GROUP BY kh.MaKhachHang, kh.HoTen
-ORDER BY TongMua DESC";
-            return db.LayBangDuLieu(sql);
-        }
         public int LayTongSoSanPham()
         {
-            try
-            {
-                OpenConn(); // Mở kết nối SQL
-                string sql = "SELECT COUNT(*) FROM SanPham";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-
-                // ExecuteScalar dùng để lấy 1 giá trị duy nhất (ở đây là con số tổng)
-                return (int)cmd.ExecuteScalar();
-            }
-            catch { return 0; }
-            finally { CloseConn(); }
+            string sql = "SELECT COUNT(*) FROM SanPham";
+            DataTable dt = LayBangDuLieu(sql);
+            if (dt.Rows.Count > 0) return Convert.ToInt32(dt.Rows[0][0]);
+            return 0;
         }
     }
 }
