@@ -15,6 +15,7 @@ namespace QLDCAM.Graphical_User_Interface
 {
     public partial class frmDonHang : Form
     {
+        
         DonHangBLL bll = new DonHangBLL();
         int maHD;
         public frmDonHang()
@@ -106,6 +107,49 @@ namespace QLDCAM.Graphical_User_Interface
         private void btnThem_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnIn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // 1. Kiểm tra xem người dùng đã chọn dòng nào trên Grid chưa
+                if (dtgHoadon.CurrentRow == null)
+                {
+                    MessageBox.Show("Vui lòng chọn một hoá đơn để in!");
+                    return;
+                }
+
+                // 2. Lấy Mã Đơn Hàng từ cột đầu tiên của dòng đang chọn
+                // Thịnh kiểm tra xem MaDonHang nằm ở Cell index mấy nhé (thường là 0)
+                int maHD = Convert.ToInt32(dtgHoadon.CurrentRow.Cells["MaDonHang"].Value);
+
+                // 3. Lấy dữ liệu từ Database (Sử dụng hàm đã viết ở Bước 1)
+                // Giả sử hàm của Thịnh trả về một DataTable
+                DataTable dt = bll.LayDuLieuInHoaDon(maHD);
+
+                if (dt.Rows.Count > 0)
+                {
+                    // 4. Khởi tạo báo cáo Thịnh đã vẽ
+                    rptHoaDon rpt = new rptHoaDon();
+
+                    // Đổ dữ liệu vào báo cáo
+                    rpt.SetDataSource(dt);
+
+                    // 5. Hiển thị lên Form Viewer
+                    frmInHoaDon f = new frmInHoaDon();
+                    f.crystalReportViewer1.ReportSource = rpt;
+                    f.ShowDialog(); // Hiện form lên theo kiểu hội thoại
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy chi tiết cho hoá đơn này!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi in hoá đơn: " + ex.Message);
+            }
         }
     }
 }

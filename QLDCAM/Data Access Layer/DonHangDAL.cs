@@ -149,6 +149,39 @@ namespace QLDCAM.Data_Access_Layer
             }
             finally { CloseConn(); }
         }
+        public DataTable LayDuLieuInHoaDon(int maHD)
+        {
+            DataTable dt = new DataTable();
+            string chuoiKetNoi = @"Data Source=DESKTOP-2947EDG;Initial Catalog=QLCHDungCuAmNhac;Integrated Security=True";
+            // Câu lệnh SQL thực hiện kết nối các bảng để lấy đầy đủ thông tin hóa đơn
+            string sql = @"SELECT d.MaDonHang, d.NgayLap, k.HoTen AS TenKhachHang, 
+                          s.TenSanPham, ct.SoLuong, ct.DonGia, 
+                          (ct.SoLuong * ct.DonGia) AS ThanhTien
+                   FROM DonHang d
+                   JOIN KhachHang k ON d.MaKhachHang = k.MaKhachHang
+                   JOIN ChiTietDonHang ct ON d.MaDonHang = ct.MaDonHang
+                   JOIN SanPham s ON ct.MaSanPham = s.MaSanPham
+                   WHERE d.MaDonHang = @MaHD";
+
+            // Sử dụng đối tượng kết nối database của bạn (ví dụ: DataProvider hoặc SqlConnection)
+            // Dưới đây là cách viết dùng SqlParameter để truyền mã hóa đơn vào câu lệnh SQL
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(chuoiKetNoi)) // Thay 'chuoiKetNoi' bằng biến của bạn
+                {
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@MaHD", maHD);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Ghi log hoặc thông báo lỗi nếu cần
+                throw ex;
+            }
+            return dt;
+        }
     }
 }
 

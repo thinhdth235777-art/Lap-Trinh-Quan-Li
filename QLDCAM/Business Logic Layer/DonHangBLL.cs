@@ -33,5 +33,12 @@ namespace QLDCAM.Business_Logic_Layer
         }
 
         public decimal LayPhiVanChuyen(int maHD) => dal.LayPhiVanChuyen(maHD);
+        public DataTable LayDuLieuInHoaDon(int maHD)
+        {
+            // Ở đây Thịnh gọi xuống lớp DAL để lấy dữ liệu
+            // Nếu Thịnh đã có lớp DonHangDAL thì viết như sau:
+            DonHangDAL dal = new DonHangDAL();
+            return dal.LayDuLieuInHoaDon(maHD);
+        }
     }
 }
