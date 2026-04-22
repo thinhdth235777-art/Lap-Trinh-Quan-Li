@@ -40,11 +40,17 @@ namespace QLDCAM.Data_Access_Layer
         // 3. Báo cáo hàng tồn kho
         public DataTable SanPhamTonKho(int threshold = 10)
         {
-            string sql = $@"SELECT s.MaSanPham, s.TenSanPham, s.SoLuongTon, s.GiaBan, l.TenLoai
-                           FROM SanPham s
-                           JOIN LoaiSanPham l ON s.MaLoai = l.MaLoai
-                           WHERE s.SoLuongTon <= {threshold}
-                           ORDER BY s.SoLuongTon ASC";
+
+            string sql = $@"SELECT 
+                        s.MaSanPham, 
+                        s.TenSanPham, 
+                        l.TenLoai,
+                        s.GiaBan, 
+                        s.SoLuongTon
+                    FROM SanPham s
+                    INNER JOIN LoaiSanPham l ON s.MaLoai = l.MaLoai
+                    WHERE s.SoLuongTon <= {threshold}
+                    ORDER BY s.SoLuongTon ASC";
 
             return LayBangDuLieu(sql);
         }

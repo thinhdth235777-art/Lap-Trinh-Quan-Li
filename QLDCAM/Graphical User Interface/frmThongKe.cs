@@ -22,7 +22,6 @@ namespace QLDCAM.Graphical_User_Interface
             // Thiết lập ngày mặc định
             dtpFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             dtpTo.Value = DateTime.Now;
-            this.WindowState = FormWindowState.Maximized;
             // Đổi tiêu đề form theo loại báo cáo
             if (loaiBaoCao == "DoanhThu") this.Text = "THỐNG KÊ DOANH THU";
             else if (loaiBaoCao == "SanPhamBanChay") this.Text = "THỐNG KÊ SẢN PHẨM BÁN CHẠY";
@@ -77,9 +76,17 @@ namespace QLDCAM.Graphical_User_Interface
             }
         }
 
-        private void btnLoc_Click_1(object sender, EventArgs e)
+        private void btnHien_Click(object sender, EventArgs e)
         {
 
+            // 1. Đặt ngày bắt đầu về một mốc xa trong quá khứ
+            dtpFrom.Value = new DateTime(2000, 1, 1);
+
+            // 2. Đặt ngày kết thúc là hiện tại
+            dtpTo.Value = DateTime.Now;
+
+            // 3. Gọi lại sự kiện Click của nút Lọc để nạp lại dữ liệu
+            btnLoc_Click(sender, e);
         }
     }
 }

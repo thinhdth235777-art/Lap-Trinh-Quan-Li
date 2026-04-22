@@ -47,13 +47,15 @@ namespace QLDCAM.Graphical_User_Interface
             this.panel2.Controls.Add(this.dtpFrom);
             this.panel2.Controls.Add(this.btnHien);
             this.panel2.Controls.Add(this.dtpTo);
-            this.panel2.Location = new System.Drawing.Point(3, 12);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(698, 87);
+            this.panel2.Size = new System.Drawing.Size(713, 76);
             this.panel2.TabIndex = 0;
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(9, 30);
             this.label2.Name = "label2";
@@ -63,6 +65,7 @@ namespace QLDCAM.Graphical_User_Interface
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(185, 28);
             this.label1.Name = "label1";
@@ -72,6 +75,7 @@ namespace QLDCAM.Graphical_User_Interface
             // 
             // btnLoc
             // 
+            this.btnLoc.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnLoc.Location = new System.Drawing.Point(368, 21);
             this.btnLoc.Name = "btnLoc";
             this.btnLoc.Size = new System.Drawing.Size(97, 26);
@@ -82,6 +86,7 @@ namespace QLDCAM.Graphical_User_Interface
             // 
             // btnXuat
             // 
+            this.btnXuat.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnXuat.Location = new System.Drawing.Point(594, 21);
             this.btnXuat.Name = "btnXuat";
             this.btnXuat.Size = new System.Drawing.Size(97, 26);
@@ -91,6 +96,7 @@ namespace QLDCAM.Graphical_User_Interface
             // 
             // dtpFrom
             // 
+            this.dtpFrom.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFrom.Location = new System.Drawing.Point(55, 24);
             this.dtpFrom.Name = "dtpFrom";
@@ -99,15 +105,18 @@ namespace QLDCAM.Graphical_User_Interface
             // 
             // btnHien
             // 
+            this.btnHien.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnHien.Location = new System.Drawing.Point(481, 21);
             this.btnHien.Name = "btnHien";
             this.btnHien.Size = new System.Drawing.Size(97, 26);
             this.btnHien.TabIndex = 21;
             this.btnHien.Text = "Hiện tất cả";
             this.btnHien.UseVisualStyleBackColor = true;
+            this.btnHien.Click += new System.EventHandler(this.btnHien_Click);
             // 
             // dtpTo
             // 
+            this.dtpTo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpTo.Location = new System.Drawing.Point(238, 24);
             this.dtpTo.Name = "dtpTo";
@@ -119,10 +128,17 @@ namespace QLDCAM.Graphical_User_Interface
             this.crystalReportViewer1.ActiveViewIndex = -1;
             this.crystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.crystalReportViewer1.Location = new System.Drawing.Point(0, 68);
+            this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
+            this.crystalReportViewer1.Margin = new System.Windows.Forms.Padding(0);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
-            this.crystalReportViewer1.Size = new System.Drawing.Size(713, 259);
+            this.crystalReportViewer1.ShowCloseButton = false;
+            this.crystalReportViewer1.ShowCopyButton = false;
+            this.crystalReportViewer1.ShowExportButton = false;
+            this.crystalReportViewer1.ShowGroupTreeButton = false;
+            this.crystalReportViewer1.ShowParameterPanelButton = false;
+            this.crystalReportViewer1.ShowRefreshButton = false;
+            this.crystalReportViewer1.Size = new System.Drawing.Size(713, 327);
             this.crystalReportViewer1.TabIndex = 1;
             // 
             // frmThongKe
