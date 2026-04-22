@@ -96,6 +96,7 @@
     <Compile Include="Business Logic Layer\LoaiSanPhamBLL.cs" />
     <Compile Include="Business Logic Layer\NhaCungCapBLL.cs" />
     <Compile Include="Business Logic Layer\NhanVienBLL.cs" />
+    <Compile Include="Business Logic Layer\PhieuNhapBLL.cs" />
     <Compile Include="Business Logic Layer\SanPhamBLL.cs" />
     <Compile Include="Business Logic Layer\TaiKhoanBLL.cs" />
     <Compile Include="Business Logic Layer\ThongKeBLL.cs" />
@@ -106,15 +107,18 @@
     <Compile Include="Data Access Layer\LoaiSanPhamDAL.cs" />
     <Compile Include="Data Access Layer\NhaCungCapDAL.cs" />
     <Compile Include="Data Access Layer\NhanVienDAL.cs" />
+    <Compile Include="Data Access Layer\PhieuNhapDAL.cs" />
     <Compile Include="Data Access Layer\SanPhamDAL.cs" />
     <Compile Include="Data Access Layer\TaiKhoanDAL.cs" />
     <Compile Include="Data Access Layer\ThongKeDAL.cs" />
     <Compile Include="Data Access Layer\ThuongHieuDAL.cs" />
     <Compile Include="Data Transfer Object\ChiTietDonHangDTO.cs" />
+    <Compile Include="Data Transfer Object\CTPhieuNhapDTO.cs" />
     <Compile Include="Data Transfer Object\DonHangDTO.cs" />
     <Compile Include="Data Transfer Object\KhachHangDTO.cs" />
     <Compile Include="Data Transfer Object\LoaiSanPhamDTO.cs" />
     <Compile Include="Data Transfer Object\NhanVienDTO.cs" />
+    <Compile Include="Data Transfer Object\PhieuNhapDTO.cs" />
     <Compile Include="Data Transfer Object\SanPhamDTO.cs" />
     <Compile Include="Data Transfer Object\TaiKhoanDTO.cs" />
     <Compile Include="Data Transfer Object\ThongKeDTO.cs" />
@@ -239,6 +243,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>rptHoaDon.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="rptSanPhamBanChay.cs">
       <AutoGen>True</AutoGen>
@@ -343,10 +348,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="rptHoaDon.rpt">
+    <EmbeddedResource Include="rptHoaDon.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptHoaDon.cs</LastGenOutput>
-    </None>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

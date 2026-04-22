@@ -53,5 +53,10 @@ namespace QLDCAM.Business_Logic_Layer
         {
             return dal.TimKiemSP(ten);
         }
+        public DataTable LayChiTietSP(int ma)
+        {
+            // dalSP là đối tượng SanPhamDAL mà Thịnh đã khai báo ở đầu lớp BLL
+            return dal.LayChiTietSP(ma);
+        }
     }
 }
