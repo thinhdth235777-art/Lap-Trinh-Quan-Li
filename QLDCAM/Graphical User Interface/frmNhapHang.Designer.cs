@@ -31,7 +31,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtNhap = new System.Windows.Forms.DateTimePicker();
             this.cbNCC = new System.Windows.Forms.ComboBox();
             this.cbNV = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -40,6 +40,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtGiaNhap = new System.Windows.Forms.TextBox();
             this.btnThem = new System.Windows.Forms.Button();
             this.numSL = new System.Windows.Forms.NumericUpDown();
             this.cbSanPham = new System.Windows.Forms.ComboBox();
@@ -49,10 +50,9 @@
             this.dgvDanhSachNhap = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnXoa = new System.Windows.Forms.Button();
             this.btnLuu = new System.Windows.Forms.Button();
             this.lblTongTien = new System.Windows.Forms.Label();
-            this.txtGiaNhap = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSL)).BeginInit();
@@ -71,7 +71,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dateTimePicker1);
+            this.groupBox2.Controls.Add(this.dtNhap);
             this.groupBox2.Controls.Add(this.cbNCC);
             this.groupBox2.Controls.Add(this.cbNV);
             this.groupBox2.Controls.Add(this.label4);
@@ -86,12 +86,13 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin phiếu nhập";
             // 
-            // dateTimePicker1
+            // dtNhap
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(143, 132);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(267, 27);
-            this.dateTimePicker1.TabIndex = 4;
+            this.dtNhap.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtNhap.Location = new System.Drawing.Point(143, 132);
+            this.dtNhap.Name = "dtNhap";
+            this.dtNhap.Size = new System.Drawing.Size(267, 27);
+            this.dtNhap.TabIndex = 4;
             // 
             // cbNCC
             // 
@@ -168,6 +169,13 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Chi tiết nhạc cụ nhập";
             // 
+            // txtGiaNhap
+            // 
+            this.txtGiaNhap.Location = new System.Drawing.Point(142, 58);
+            this.txtGiaNhap.Name = "txtGiaNhap";
+            this.txtGiaNhap.Size = new System.Drawing.Size(237, 27);
+            this.txtGiaNhap.TabIndex = 8;
+            // 
             // btnThem
             // 
             this.btnThem.Location = new System.Drawing.Point(111, 138);
@@ -186,9 +194,19 @@
             0,
             0,
             0});
+            this.numSL.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numSL.Name = "numSL";
             this.numSL.Size = new System.Drawing.Size(237, 27);
             this.numSL.TabIndex = 6;
+            this.numSL.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // cbSanPham
             // 
@@ -241,7 +259,7 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.button4);
-            this.groupBox4.Controls.Add(this.button3);
+            this.groupBox4.Controls.Add(this.btnXoa);
             this.groupBox4.Controls.Add(this.btnLuu);
             this.groupBox4.Controls.Add(this.lblTongTien);
             this.groupBox4.Location = new System.Drawing.Point(12, 472);
@@ -260,14 +278,15 @@
             this.button4.Text = "Thoát";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnXoa
             // 
-            this.button3.Location = new System.Drawing.Point(313, 101);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(124, 39);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Xóa dòng";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnXoa.Location = new System.Drawing.Point(313, 101);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(124, 39);
+            this.btnXoa.TabIndex = 1;
+            this.btnXoa.Text = "Xóa dòng";
+            this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnLuu
             // 
@@ -288,13 +307,6 @@
             this.lblTongTien.Size = new System.Drawing.Size(107, 26);
             this.lblTongTien.TabIndex = 0;
             this.lblTongTien.Text = "Tổng tiền:";
-            // 
-            // txtGiaNhap
-            // 
-            this.txtGiaNhap.Location = new System.Drawing.Point(142, 58);
-            this.txtGiaNhap.Name = "txtGiaNhap";
-            this.txtGiaNhap.Size = new System.Drawing.Size(237, 27);
-            this.txtGiaNhap.TabIndex = 8;
             // 
             // frmNhapHang
             // 
@@ -335,7 +347,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtNhap;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
@@ -346,7 +358,7 @@
         private System.Windows.Forms.DataGridView dgvDanhSachNhap;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnLuu;
         private System.Windows.Forms.Label lblTongTien;
         private System.Windows.Forms.TextBox txtGiaNhap;

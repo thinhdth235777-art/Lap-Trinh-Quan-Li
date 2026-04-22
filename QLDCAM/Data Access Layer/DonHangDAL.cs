@@ -71,9 +71,9 @@ namespace QLDCAM.Data_Access_Layer
                     try
                     {
                         // 1. Thêm Đơn Hàng
-                        string sqlHD = "INSERT INTO DonHang (MaKhachHang, MaNhanVien, NgayLap, TongTien, PhiVanChuyen, TrangThai) " +
+                        string sqlHD = "INSERT INTO DonHang (MaKhachHang, MaNhanVien, NgayLap, TongTien, PhiVanChuyen) " +
                             "OUTPUT INSERTED.MaDonHang " +
-                            "VALUES (@makh, @manv, @ngay, @tong, @phi, N'Đã xong')";
+                            "VALUES (@makh, @manv, @ngay, @tong, @phi)";
                         SqlCommand cmdHD = new SqlCommand(sqlHD, conn, trans);
                         cmdHD.Parameters.AddWithValue("@makh", hd.MaKhachHang);
                         cmdHD.Parameters.AddWithValue("@manv", hd.MaNhanVien);
@@ -186,6 +186,23 @@ namespace QLDCAM.Data_Access_Layer
                 throw ex;
             }
             return dt;
+        }
+        public int LuuDonHang(DonHangDTO dh)
+        {
+            // Lưu thông tin chung và trả về MaDonHang vừa tạo
+            string sql = @"INSERT INTO DonHang (MaKhachHang, MaNhanVien, NgayLap, TongTien, PhiVanChuyen) 
+                   VALUES (@maKH, @maNV, @ngay, @tong, @phi);
+                   SELECT SCOPE_IDENTITY();";
+
+            SqlParameter[] p = {
+        new SqlParameter("@maKH", dh.MaKhachHang),
+        new SqlParameter("@maNV", dh.MaNhanVien),
+        new SqlParameter("@ngay", dh.NgayLap),
+        new SqlParameter("@tong", dh.TongTien),
+        new SqlParameter("@phi", dh.PhiVanChuyen)
+    };
+
+            return Convert.ToInt32((sql, p)); // ExecuteScalar để lấy cái ID vừa tạo
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using QLDCAM.Business_Logic_Layer;
+using QLDCAM.Data_Transfer_Object;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -107,13 +108,75 @@ namespace QLDCAM.Graphical_User_Interface
                 return;
             }
 
-            // 1. Tạo đối tượng PhieuNhapDTO và gán giá trị từ form
-            // 2. Gọi BLL để lưu
-            // if (phieuNhapBLL.LuuPhieu(phieuNhapDTO, dtNhapHang)) { ... }
+            try
+            {
+                // 2. Tạo đối tượng PhieuNhapDTO và gán giá trị từ các ô nhập liệu
+                PhieuNhapDTO phieuNhapDTO = new PhieuNhapDTO();
+                phieuNhapDTO.MaNhanVien = (int)cbNV.SelectedValue;
+                phieuNhapDTO.MaNhaCungCap = (int)cbNCC.SelectedValue;
+                phieuNhapDTO.NgayNhap = dtNhap.Value;
 
-            MessageBox.Show("Nhập hàng thành công! Số lượng sản phẩm đã được cộng vào kho.");
-            dtNhapHang.Clear();
-            TinhTongTien();
+                // Lọc sạch chữ VNĐ và dấu phẩy để lấy con số tính toán
+                string sTongTien = lblTongTien.Text.Replace(",", "").Replace(" VNĐ", "");
+                phieuNhapDTO.TongTien = decimal.Parse(sTongTien);
+
+                // 3. Gọi tầng BLL để thực hiện lưu xuống Database và CỘNG KHO
+                PhieuNhapBLL phieuNhapBLL = new PhieuNhapBLL();
+
+                // Chỉ khi hàm này trả về true (thành công) mới hiện thông báo
+                if (phieuNhapBLL.LuuPhieu(phieuNhapDTO, dtNhapHang))
+                {
+                    MessageBox.Show("Nhập hàng thành công! Số lượng sản phẩm đã được cộng vào kho.");
+
+                    // Xóa trắng bảng tạm để chuẩn bị nhập phiếu mới
+                    dtNhapHang.Clear();
+                    TinhTongTien();
+
+                    // (Tùy chọn) Gọi hàm load lại bảng Sản phẩm nếu bạn muốn cập nhật ngay con số -1 kia
+                    // HienThiSanPham(); 
+                }
+                else
+                {
+                    MessageBox.Show("Lưu phiếu nhập thất bại! Vui lòng kiểm tra lại kết nối.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi hệ thống: " + ex.Message);
+            }
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            // 1. Kiểm tra xem Thịnh đã chọn dòng nào trên lưới chưa
+            // Giả sử DataGridView của Thịnh tên là dgvNhapHang
+            if (dgvDanhSachNhap.CurrentRow == null)
+            {
+                MessageBox.Show("Vui lòng chọn dòng sản phẩm cần xóa trong danh sách!");
+                return;
+            }
+
+            // 2. Hỏi xác nhận để tránh việc Thịnh lỡ tay bấm nhầm
+            DialogResult r = MessageBox.Show("Bạn có chắc chắn muốn xóa sản phẩm này khỏi phiếu nhập không?",
+                                             "Xác nhận xóa",
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Question);
+
+            if (r == DialogResult.Yes)
+            {
+                // 3. Lấy vị trí (Index) của dòng đang được chọn
+                int index = dgvDanhSachNhap.CurrentRow.Index;
+
+                // 4. Xóa dòng tương ứng trong DataTable tạm (dtNhapHang)
+                // Khi xóa ở DataTable, DataGridView sẽ tự động cập nhật mất dòng đó luôn
+                dtNhapHang.Rows.RemoveAt(index);
+
+                // 5. Rất quan trọng: Phải gọi lại hàm tính tổng tiền để con số 60,000,000 VNĐ cập nhật lại
+                // Dòng này dựa trên hàm Thịnh đã viết ở các bước trước
+                TinhTongTien();
+
+                MessageBox.Show("Đã xóa dòng thành công!");
+            }
         }
     }
 }

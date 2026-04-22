@@ -24,7 +24,6 @@ namespace QLDCAM.Business_Logic_Layer
             // Logic: Khách ở An Giang phí = 0, tỉnh khác 30k
             return (tinhThanh != null && tinhThanh.Contains("An Giang")) ? 0 : 30000;
         }
-
         public bool LuuHoaDon(DonHangDTO hd, List<ChiTietDonHangDTO> ds) => dal.LuuHoaDonFull(hd, ds);
         public bool HuyDonHang(int maHD)
         {

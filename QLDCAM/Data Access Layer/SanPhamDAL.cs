@@ -99,5 +99,13 @@ namespace QLDCAM.Data_Access_Layer
                 return 0;
             }
         }
+        public DataTable LayChiTietSP(int ma)
+        {
+            // Câu lệnh SQL để lấy 1 sản phẩm duy nhất dựa trên mã
+            string sql = "SELECT * FROM SanPham WHERE MaSanPham = " + ma;
+
+            // db là đối tượng kết nối database (DataProvider) mà Thịnh dùng chung cho cả dự án
+            return db.LayBangDuLieu(sql);
+        }
     }
 }
