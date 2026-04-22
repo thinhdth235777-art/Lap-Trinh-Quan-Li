@@ -93,6 +93,7 @@ namespace QLDCAM.Graphical_User_Interface
             this.btnXuat.TabIndex = 20;
             this.btnXuat.Text = "Xuất Excel";
             this.btnXuat.UseVisualStyleBackColor = true;
+            this.btnXuat.Click += new System.EventHandler(this.btnXuat_Click);
             // 
             // dtpFrom
             // 
